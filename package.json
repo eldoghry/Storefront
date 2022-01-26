@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
+    "migrate": "npx db-migrate down && db-migrate up",
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "test": "jasmine-ts",
@@ -14,6 +15,9 @@
   "dependencies": {
     "@types/node": "^17.0.12",
     "body-parser": "^1.19.0",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^14.3.2",
     "express": "^4.17.1",
     "pg": "^8.5.1",
     "typescript": "^4.1.3"
