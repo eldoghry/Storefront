@@ -1,15 +1,24 @@
-import express, { Request, Response } from 'express'
-import bodyParser from 'body-parser'
+import express from 'express';
+import bodyParser from 'body-parser';
 
-const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+//importing routers
+import userRouter from './router/userRouter';
+import categoryRouter from './router/categoryRouter';
 
-app.use(bodyParser.json())
+const app: express.Application = express();
+const host: string = process.env.HOST as string;
+const port: number = process.env.port as unknown as number;
+const address = `${host}:${port}`;
 
-app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World!')
-})
+//General Middlewares
+// TODO: implement cors
+app.use(bodyParser.json());
 
-app.listen(3000, function () {
-    console.log(`starting app on: ${address}`)
-})
+//Routing
+app.use('/users', userRouter);
+app.use('/categories', categoryRouter);
+
+//Listen
+app.listen(port, function () {
+  console.log(`starting app on: ${address}`);
+});
