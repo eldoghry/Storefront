@@ -1,6 +1,5 @@
 import category from '../interface/category';
 import client from '../database';
-import bcrypt from 'bcrypt';
 
 export default class CategoryStore {
   async index(): Promise<category[]> {
@@ -24,6 +23,7 @@ export default class CategoryStore {
 
       con.release();
 
+      console.log('cat created');
       return results.rows[0];
     } catch (err) {
       throw `can't create categories ${err}`;
@@ -45,12 +45,14 @@ export default class CategoryStore {
 
   async delete(id: number): Promise<void> {
     try {
+      //TODO: check if there products with cat before delete it
+
       const con = await client.connect();
-      const sql = `DELETE FROM categories WHERE id=$1`;
+      const sql = `DELETE FROM categories WHERE id=$1 RETURNING *`;
       const results = await con.query(sql, [id]);
       con.release();
 
-      if (!results.rows[0]) throw `category with id:(${id}) not exist!`;
+      if (!results.rows[0]) throw `category with id:(${id}) not found!`;
     } catch (err) {
       throw `can't delete category: ${err}`;
     }
@@ -59,11 +61,11 @@ export default class CategoryStore {
   async update(cat: category): Promise<category> {
     try {
       const con = await client.connect();
-      const sql = ` UPDATE categories SET name= $2 WHERE id=$1`;
+      const sql = ` UPDATE categories SET name= $2 WHERE id=$1 RETURNING *`;
       const results = await con.query(sql, [cat.id, cat.name]);
       con.release();
 
-      if (!results.rows[0]) throw `category with id:(${cat.id}) not exist!`;
+      if (!results.rows[0]) throw `category with id:(${cat.id}) not found!`;
       return results.rows[0];
     } catch (err) {
       throw `can't update category: ${err}`;

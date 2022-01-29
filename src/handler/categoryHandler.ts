@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import categoryStore from '../model/category';
 import category from '../interface/category';
-import jwt from 'jsonwebtoken';
 
 import normalizeString from '../utilites/normalizeString';
+import customErrorRes from '../utilites/customError';
 
 const index = async (_req: Request, res: Response) => {
   try {
@@ -24,7 +24,9 @@ const index = async (_req: Request, res: Response) => {
 //register
 const create = async (req: Request, res: Response) => {
   try {
-    const name: string = normalizeString(req.params.name);
+    const name: string | undefined = normalizeString(req.body.name);
+    if (!name) throw 'Invalid name, must use valid string name';
+
     const newCategory: category = await new categoryStore().create({ name });
 
     res.status(201).json({
@@ -42,8 +44,9 @@ const create = async (req: Request, res: Response) => {
 const show = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id);
-    console.log('Cat id from show: ', id);
     const category = await new categoryStore().show(id);
+
+    if (!category) return customErrorRes(res, 400, `Category with id(${id}) not found`);
 
     res.status(200).json({
       status: 'success',
@@ -74,7 +77,9 @@ const destroy = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id);
-    const name = normalizeString(req.body.name);
+    const name: string | undefined = normalizeString(req.body.name);
+
+    if (!name) throw 'Invalid name, must use valid string name';
 
     const category = await new categoryStore().update({ id, name });
 

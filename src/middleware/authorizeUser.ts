@@ -14,5 +14,8 @@ export default (req: Request, res: Response, next: NextFunction) => {
   const user = jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string) as user;
 
   if (user.id !== id) return customErrorRes(res, 403, `Forbiden!. Token not belong to this user`);
-  else next();
+  else {
+    console.log(`User authorized`);
+    next();
+  }
 };

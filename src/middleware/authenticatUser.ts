@@ -13,5 +13,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
   if (!(await new UserStore().auth(user.id as number, user.username as string, user.password_digest as string)))
     return customErrorRes(res, 401, `Access Denied! Wrong Credentials or user not exist`);
-  else next();
+  else {
+    console.log(`User authenicated`);
+    next();
+  }
 };
