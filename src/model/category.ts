@@ -5,7 +5,7 @@ export default class CategoryStore {
   async index(): Promise<category[]> {
     try {
       const con = await client.connect();
-      const sql = `SELECT id, name FROM categories`;
+      const sql = `SELECT * FROM categories`;
       const results = await con.query(sql);
       con.release();
 

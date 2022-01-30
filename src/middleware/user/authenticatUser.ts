@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import customErrorRes from '../utilites/customError';
+import customErrorRes from '../../utilites/customError';
 import jwt from 'jsonwebtoken';
-import user from '../interface/user';
-import UserStore from '../model/user';
+import user from '../../interface/user';
+import UserStore from '../../model/user';
 
 //check if user is exist in DB and credentials are correct
 export default async (req: Request, res: Response, next: NextFunction) => {

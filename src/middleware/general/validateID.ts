@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import customErrorRes from '../utilites/customError';
+import customErrorRes from '../../utilites/customError';
 
 //validate id is number and > 0
 

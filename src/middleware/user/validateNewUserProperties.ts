@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import customErrorRes from '../utilites/customError';
+import customErrorRes from '../../utilites/customError';
 
 //validate new user properties
 

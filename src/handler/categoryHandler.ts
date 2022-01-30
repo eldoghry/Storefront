@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import categoryStore from '../model/category';
 import category from '../interface/category';
 
+//importing utilities
 import normalizeString from '../utilites/normalizeString';
 import customErrorRes from '../utilites/customError';
 
@@ -21,7 +22,6 @@ const index = async (_req: Request, res: Response) => {
   }
 };
 
-//register
 const create = async (req: Request, res: Response) => {
   try {
     const name: string | undefined = normalizeString(req.body.name);

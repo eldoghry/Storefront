@@ -2,11 +2,11 @@ import express from 'express';
 import handler from '../handler/userHandler';
 
 //importing middlewares
-import isAuthTokenExist from '../middleware/isAuthTokenExist';
-import isAuthTokenValid from '../middleware/isAuthTokenValid';
-import authorizeUser from '../middleware/authorizeUser';
-import authenticatUser from '../middleware/authenticatUser';
-import validateNewUserProperties from '../middleware/validateNewUserProperties';
+import isAuthTokenExist from '../middleware/user/isAuthTokenExist';
+import isAuthTokenValid from '../middleware/user/isAuthTokenValid';
+import authorizeUser from '../middleware/user/authorizeUser';
+import authenticatUser from '../middleware/user/authenticatUser';
+import validateNewUserProperties from '../middleware/user/validateNewUserProperties';
 
 const router = express.Router();
 

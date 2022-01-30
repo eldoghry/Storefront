@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import customErrorRes from '../utilites/customError';
+import customErrorRes from '../../utilites/customError';
 import jwt from 'jsonwebtoken';
-import user from '../interface/user';
+import user from '../../interface/user';
 
 //check permissions
 //check if token belonge to user by validate id
