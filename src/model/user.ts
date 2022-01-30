@@ -65,16 +65,35 @@ export default class UserStore {
   }
 
   //TODO: custom error message return like user not exist , wrong Credentials
-  async auth(id: number, username: string, hash: string): Promise<boolean> {
+  async login(username: string, password: string): Promise<user | null> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM users WHERE id=$1 AND username = $2 AND password_digest=$3`;
-      const results = await con.query(sql, [id, username, hash]);
+      const sql = `SELECT * FROM users WHERE username = $1 `;
+      const results = await con.query(sql, [username]);
+      con.release();
+
+      const user = results.rows[0];
+      const pepper: string = process.env.BCRYPT_PASSWORD as string;
+
+      const isPasswordCorrect: boolean = await bcrypt.compare(password + pepper, user.password_digest);
+      console.log(isPasswordCorrect);
+      if (isPasswordCorrect) return results.rows[0];
+      else return null;
+    } catch (err) {
+      throw `can't authenticate user with username (${username}): ${err}`;
+    }
+  }
+
+  async auth(username: string, hash: string): Promise<boolean> {
+    try {
+      const con = await client.connect();
+      const sql = `SELECT * FROM users WHERE username = $1 AND password_digest = $2`;
+      const results = await con.query(sql, [username, hash]);
       con.release();
 
       return results.rows[0];
     } catch (err) {
-      throw `can't auth user with id(${id}): ${err}`;
+      throw `can't authenticate user with username (${username}): ${err}`;
     }
   }
 }

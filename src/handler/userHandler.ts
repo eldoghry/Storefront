@@ -3,6 +3,7 @@ import UserStore from '../model/user';
 import user from '../interface/user';
 import jwt from 'jsonwebtoken';
 import normalizeString from '../utilites/normalizeString';
+import bcrypt from 'bcrypt';
 import customErrorRes from '../utilites/customError';
 
 // TODO: Implement expired token check
@@ -12,6 +13,7 @@ import customErrorRes from '../utilites/customError';
 const index = async (_req: Request, res: Response) => {
   try {
     const users = await new UserStore().index();
+
     res.status(200).json({
       status: 'success',
       data: { users },
@@ -39,7 +41,11 @@ const create = async (req: Request, res: Response) => {
       password,
     });
 
-    const userSign = jwt.sign(newUser as user, process.env.TOKEN_ACCESS_SECRET as string);
+    console.log(newUser);
+
+    const userSign = jwt.sign(newUser as user, process.env.TOKEN_ACCESS_SECRET as string, {
+      expiresIn: '10h',
+    });
 
     res.status(201).json({
       status: 'success',
@@ -100,7 +106,30 @@ const destroy = async (req: Request, res: Response) => {
 };
 
 //login when token is exprired
-// const login = (id: number, password: string): boolean => {};
+const login = async (req: Request, res: Response) => {
+  try {
+    const username: string = req.body.username;
+    const password: string = req.body.password;
+
+    const authUser = await new UserStore().login(username, password);
+
+    if (!authUser) return customErrorRes(res, 401, 'Access Dined Wrong Credintials');
+
+    const userSign = jwt.sign(authUser as user, process.env.TOKEN_ACCESS_SECRET as string, {
+      expiresIn: '10h',
+    });
+
+    res.status(200).json({
+      status: 'success',
+      token: userSign,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      error: err,
+    });
+  }
+};
 
 // const deleteUser = (_req: Request, res: Response) => {
 //   try {
@@ -135,5 +164,6 @@ export default {
   create,
   show,
   destroy,
+  login,
   // updateUser,
 };

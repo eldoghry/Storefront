@@ -6,6 +6,7 @@ import userRouter from './router/userRouter';
 import categoryRouter from './router/categoryRouter';
 import productRouter from './router/productRouter';
 import dashboardRouter from './router/dashboardRouter';
+import orderRouter from './router/orderRouter';
 
 const app: express.Application = express();
 const host: string = process.env.HOST as string;
@@ -21,6 +22,7 @@ app.use('/users', userRouter);
 app.use('/categories', categoryRouter);
 app.use('/products', productRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/orders', orderRouter);
 
 //Handle unkown endpoints
 app.all('*', (req: Request, res: Response) =>

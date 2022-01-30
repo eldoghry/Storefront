@@ -6,15 +6,18 @@ import UserStore from '../../model/user';
 
 //check if user is exist in DB and credentials are correct
 export default async (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers.authorization;
-  const token: string = authHeader?.split(' ')[1] as string;
+  try {
+    const authHeader = req.headers.authorization;
 
-  const user: user = jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string) as user;
+    const token: string = authHeader?.split(' ')[1] as string;
 
-  if (!(await new UserStore().auth(user.id as number, user.username as string, user.password_digest as string)))
-    return customErrorRes(res, 401, `Access Denied! Wrong Credentials or user not exist`);
-  else {
-    console.log(`User authenicated`);
-    next();
+    const user: user = jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string) as user;
+
+    const isAuthenicated: boolean = await new UserStore().auth(user.username as string, user.password_digest as string);
+
+    if (!isAuthenicated) return customErrorRes(res, 401, `Access Denied! Wrong Credentials or user not exist`);
+    else next();
+  } catch (err) {
+    res.status(500).json({ error: err });
   }
 };

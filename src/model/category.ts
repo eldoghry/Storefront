@@ -15,11 +15,11 @@ export default class CategoryStore {
     }
   }
 
-  async create(cat: category): Promise<category> {
+  async create(name: string): Promise<category> {
     try {
       const con = await client.connect();
       const sql = `INSERT INTO categories (name) VALUES($1) RETURNING *`;
-      const results = await con.query(sql, [cat.name]);
+      const results = await con.query(sql, [name]);
 
       con.release();
 

@@ -25,9 +25,10 @@ const index = async (_req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     const name: string | undefined = normalizeString(req.body.name);
+
     if (!name) throw 'Invalid name, must use valid string name';
 
-    const newCategory: category = await new categoryStore().create({ name });
+    const newCategory: category = await new categoryStore().create(name);
 
     res.status(201).json({
       status: 'success',
@@ -46,7 +47,8 @@ const show = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     const category = await new categoryStore().show(id);
 
-    if (!category) return customErrorRes(res, 400, `Category with id(${id}) not found`);
+    if (!category)
+      return customErrorRes(res, 400, `Category with id(${id}) not found`);
 
     res.status(200).json({
       status: 'success',

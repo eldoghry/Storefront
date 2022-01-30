@@ -7,7 +7,7 @@ import isAuthTokenValid from '../middleware/user/isAuthTokenValid';
 import authorizeUser from '../middleware/user/authorizeUser';
 import authenticatUser from '../middleware/user/authenticatUser';
 import validateNewUserProperties from '../middleware/user/validateNewUserProperties';
-
+import validateLoginUserProperties from '../middleware/user/validateLoginUserProperties';
 const router = express.Router();
 
 const checkAuthToken = [isAuthTokenExist, isAuthTokenValid, authenticatUser]; //user exist, credientials correct
@@ -16,5 +16,7 @@ const checkAuthorizedToken = [isAuthTokenExist, isAuthTokenValid, authenticatUse
 router.route('/').get(checkAuthToken, handler.index).post(validateNewUserProperties, handler.create);
 
 router.route('/:id').get(checkAuthorizedToken, handler.show).delete(checkAuthorizedToken, handler.destroy);
+
+router.route('/login').post(validateLoginUserProperties, handler.login);
 
 export default router;
