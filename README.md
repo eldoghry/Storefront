@@ -39,6 +39,166 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 <details>
     <summary> Users </summary>
+
+- ### Get Users list
+
+  return list of users, **JWT user token** is required.
+
+  Path: `/users`
+
+  Method: **_GET_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  > Response Example
+
+  ```
+  {
+    "status": "success",
+    "data": {
+        "results": 3,
+        "users": [
+            {
+                "id": 1,
+                "username": "username1",
+                "firstname": "firstname1",
+                "lastname": "lastname1"
+            },
+
+            {
+                "id": 2,
+                "username": "username2",
+                "firstname": "firstname2",
+                "lastname": "lastname2"
+            },
+            {
+                "id": 3,
+                "username": "username3",
+                "firstname": "firstname3",
+                "lastname": "lastname3"
+            }
+        ]
+    }
+  }
+  ```
+
+- ### Create User
+
+  create user
+
+  Path: `/users`
+
+  Method: **_POST_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description    |
+  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | -------------- |
+  | body     | _username_  | string | -       | Yes      | No     | Yes     | must be unique |
+  | body     | _firstname_ | string | -       | Yes      | No     | Yes     | -              |
+  | body     | _lastname_  | string | -       | Yes      | No     | Yes     | -              |
+  | body     | _password_  | string | -       | Yes      | No     | Yes     | -              |
+
+  > Examples
+
+  `/user`
+  create new user
+
+  > Payload JSON Example
+
+  ```
+  {
+    "username":"magdy",
+    "firstname":"mohamed",
+    "lastname":"magdy",
+    "password":"password"
+  }
+  ```
+
+  > Response Example
+
+  ```
+  {
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJtYWdkeSIsImZpcnN0bmFtZSI6Im1vaGFtZWQiLCJsYXN0bmFtZSI6Im1hZ2R5IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJEFpWGlKRjFLNlFyT2o3ZzcxS3FFVC52U0FHb2NabUVuV0FXQjdad0N4RE1mQU9aTXZ3ZjZHIiwiaWF0IjoxNjQzOTAyMjY3LCJleHAiOjE2NDM5MzgyNjd9.s2wvt4KYWf9nZ1B27cS__pK00csQkd4RzGuWONHNnug"
+  }
+  ```
+
+- ### Show user
+
+  Get more information about user, **JWT user token** is required.
+
+  Path: `/users/:id`
+
+  Method: **_get_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/users/1`
+  return user with id: 1, user token must have access to resource.
+
+  > Response Example
+
+  ```
+  {
+    "status": "success",
+    "user": {
+        "id": 1,
+        "username": "magdy",
+        "firstname": "mohamed",
+        "lastname": "magdy",
+        "password_digest": "$2b$10$AiXiJF1K6QrOj7g71KqET.vSAGocZmEnWAWB7ZwCxDMfAOZMvwf6G",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJtYWdkeSIsImZpcnN0bmFtZSI6Im1vaGFtZWQiLCJsYXN0bmFtZSI6Im1hZ2R5IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJEFpWGlKRjFLNlFyT2o3ZzcxS3FFVC52U0FHb2NabUVuV0FXQjdad0N4RE1mQU9aTXZ3ZjZHIiwiaWF0IjoxNjQzOTAyMjY3LCJleHAiOjE2NDM5MzgyNjd9.s2wvt4KYWf9nZ1B27cS__pK00csQkd4RzGuWONHNnug"
+    }
+  }
+  ```
+
+- ### Delete User
+
+  delete user, **JWT user token** is required.
+  Path: `/users/:id`
+
+  Method: **_delete_** / Status code : `204`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/users/1`
+  return user with id: 1, user token must have access to resource.
+
 </details>
 
 <details>

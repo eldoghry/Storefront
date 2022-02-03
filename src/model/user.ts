@@ -3,7 +3,7 @@ import client from '../database';
 import bcrypt from 'bcrypt';
 
 export default class UserStore {
-  async index(): Promise<user[] | undefined> {
+  async index(): Promise<user[]> {
     try {
       const con = await client.connect();
       const sql = `SELECT id, username, firstname, lastname FROM users`;

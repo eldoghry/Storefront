@@ -12,11 +12,11 @@ import customErrorRes from '../utilites/customError';
 
 const index = async (_req: Request, res: Response) => {
   try {
-    const users = await new UserStore().index();
+    const users: user[] = await new UserStore().index();
 
     res.status(200).json({
       status: 'success',
-      data: { users },
+      data: { results: users.length, users },
     });
   } catch (err) {
     res.status(400).json({
@@ -113,7 +113,7 @@ const login = async (req: Request, res: Response) => {
 
     const authUser = await new UserStore().login(username, password);
 
-    if (!authUser) return customErrorRes(res, 401, 'Access Dined Wrong Credintials');
+    if (!authUser) return customErrorRes(res, 401, 'Access Denied Wrong Credintials');
 
     const userSign = jwt.sign(authUser as user, process.env.TOKEN_ACCESS_SECRET as string, {
       expiresIn: '10h',
@@ -131,31 +131,32 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-// const deleteUser = (_req: Request, res: Response) => {
+// const update = async (req: Request, res: Response) => {
 //   try {
-//     res.status(200).json({
-//       status: "success",
-//       data: {},
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       status: "error",
-//       error: err,
-//     });
-//   }
-// };
+//     const id = parseInt(req.params.id);
+//     const username: string = req.body.username;
 
-// const updateUser = (_req: Request, res: Response) => {
-//   try {
+//     const password: string = req.body.password;
+//     const new_password: string = req.body.new_password;
+//     const new_password_confirmation: string = req.body.new_password_confirmation;
+
+//     const invalidMsg = [];
+
+//     const authUser = await new UserStore().login(username, password);
+
+//     if (!authUser) return customErrorRes(res, 401, 'Access Denied Wrong Credintials');
+
+//     //sign new user object
+//     const userSign = jwt.sign(authUser as user, process.env.TOKEN_ACCESS_SECRET as string, {
+//       expiresIn: '10h',
+//     });
+
 //     res.status(200).json({
-//       status: "success",
-//       data: {},
+//       status: 'success',
+//       token: userSign,
 //     });
 //   } catch (err) {
-//     res.status(400).json({
-//       status: "error",
-//       error: err,
-//     });
+//     customErrorRes(res, 500, err as string);
 //   }
 // };
 
@@ -165,5 +166,5 @@ export default {
   show,
   destroy,
   login,
-  // updateUser,
+  // update,
 };

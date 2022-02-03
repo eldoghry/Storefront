@@ -17,6 +17,7 @@ const checkAuthorizedToken = [isAuthTokenExist, isAuthTokenValid, authenticatUse
 router.route('/').get(checkAuthToken, handler.index).post(validateNewUserProperties, handler.create);
 
 router.route('/:id').get(checkAuthorizedToken, handler.show).delete(checkAuthorizedToken, handler.destroy);
+//   .patch(checkAuthorizedToken, handler.update);
 
 router.route('/login').post(validateLoginUserProperties, handler.login);
 
