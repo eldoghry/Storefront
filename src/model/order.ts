@@ -2,7 +2,7 @@ import order from '../interface/order';
 import client from '../database';
 
 export default class OrderStore {
-  async index(userID: number, status: string = ''): Promise<order[]> {
+  async index(userID: number, status = ''): Promise<order[]> {
     try {
       const con = await client.connect();
       const sql = status
@@ -55,7 +55,9 @@ export default class OrderStore {
       const con = await client.connect();
 
       const sql = `DELETE FROM orders WHERE id=$1 RETURNING *`;
-      const results = await con.query(sql, [id]);
+
+      await con.query(sql, [id]);
+
       con.release();
     } catch (err) {
       throw `can't delete order: ${err}`;

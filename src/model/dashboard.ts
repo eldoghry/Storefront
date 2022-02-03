@@ -15,7 +15,7 @@ export default class DashboardQueries {
     }
   }
 
-  async popularProduct(limit: number = 5, sort: string = 'DESC'): Promise<product[]> {
+  async popularProduct(limit = 5, sort = 'DESC'): Promise<product[]> {
     try {
       const con = await client.connect();
       const sql = `SELECT product_id, count(*) FROM order_products GROUP BY product_id ORDER BY count ${sort} LIMIT ${limit}`;

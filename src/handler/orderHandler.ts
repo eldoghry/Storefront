@@ -137,7 +137,7 @@ const addProduct = async (req: Request, res: Response) => {
       return customErrorRes(res, 400, `cannot add products to completed order(${orderID})`);
 
     //2) update order
-    const orderProduct = await new OrderStore().addProduct(orderID, productID, quantity);
+    await new OrderStore().addProduct(orderID, productID, quantity);
 
     //3) return full cart
     const cart = await new OrderStore().cart(orderID);

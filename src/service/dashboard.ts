@@ -24,7 +24,7 @@ const popularProduct = async (req: Request, res: Response) => {
   try {
     //queries
     const limit: number = parseInt(req.query.limit as string);
-    let sort: string | undefined = req.query.sort as string;
+    const sort: string | undefined = req.query.sort as string;
     let finalLimit = 5;
     let finalSort = 'DESC';
 

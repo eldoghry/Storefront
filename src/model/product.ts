@@ -60,7 +60,7 @@ export default class ProductStore {
   async update(updateProductObj: updateProduct): Promise<product> {
     try {
       //first generate sql statment
-      let arr: string[] = [];
+      const arr: string[] = [];
 
       for (const [key, value] of Object.entries(updateProductObj)) {
         if (key !== 'id') arr.push(`${key}=${typeof value === 'string' ? "'" + value + "'" : value}`);

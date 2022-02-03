@@ -47,8 +47,7 @@ const show = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     const category = await new categoryStore().show(id);
 
-    if (!category)
-      return customErrorRes(res, 400, `Category with id(${id}) not found`);
+    if (!category) return customErrorRes(res, 400, `Category with id(${id}) not found`);
 
     res.status(200).json({
       status: 'success',

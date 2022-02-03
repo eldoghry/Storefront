@@ -3,7 +3,6 @@ import UserStore from '../model/user';
 import user from '../interface/user';
 import jwt from 'jsonwebtoken';
 import normalizeString from '../utilites/normalizeString';
-import bcrypt from 'bcrypt';
 import customErrorRes from '../utilites/customError';
 
 // TODO: Implement expired token check
@@ -88,7 +87,6 @@ const destroy = async (req: Request, res: Response) => {
     // TODO: check id and token exit firstor return 400
     // TODO: check token secret or return 500
 
-    const id = parseInt(req.params.id as string);
     const authHeader = req.headers.authorization;
     const token: string = authHeader?.split(' ')[1] as string;
 

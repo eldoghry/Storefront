@@ -9,7 +9,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
   const token: string = authHeader?.split(' ')[1] as string;
 
   //valid token ?
-  jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string, (err, _u) => {
+  jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string, (err, u) => {
     if (err) return customErrorRes(res, 401, `invalid token!, ${err}`);
     else next();
   });

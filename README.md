@@ -37,7 +37,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 ## API Resources
 
-<details>
+<details open>
     <summary> Users </summary>
 
 - ### Get Users list

@@ -108,7 +108,7 @@ const update = async (req: Request, res: Response) => {
 
 //helper function
 const createUpdateObject = (obj: updateProduct): updateProduct => {
-  let final: updateProduct = {};
+  const final: updateProduct = {};
 
   if (obj.id) final.id = obj.id;
   if (obj.name) final.name = obj.name;

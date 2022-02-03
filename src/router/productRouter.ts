@@ -13,24 +13,11 @@ import validateUpdateProductParams from '../middleware/product/validateUpdatePro
 const router = express.Router();
 const checkAuthToken = [isAuthTokenExist, isAuthTokenValid, authenticatUser]; //user exist, credientials correct
 
-router
-  .route('/')
-  .get(handler.index)
-  .post(
-    checkAuthToken,
-    validateNewProductParams,
-    isCategoryExist,
-    handler.create
-  );
+router.route('/').get(handler.index).post(checkAuthToken, validateNewProductParams, isCategoryExist, handler.create);
 router
   .route('/:id')
   .get(validateID, handler.show)
   .delete(validateID, checkAuthToken, handler.destroy)
-  .patch(
-    validateID,
-    checkAuthToken,
-    validateUpdateProductParams,
-    handler.update
-  );
+  .patch(validateID, checkAuthToken, validateUpdateProductParams, handler.update);
 
 export default router;

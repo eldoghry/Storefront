@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import customErrorRes from '../../utilites/customError';
-import jwt from 'jsonwebtoken';
 
 //check if header contain token
 
