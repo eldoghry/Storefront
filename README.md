@@ -35,9 +35,9 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 #### Get Orders list
 
-Path: `/orders`
-Method: **_GET_**
-status code : `200`
+Path: `/orders`.
+Method: **_GET_**.
+status code : `200`.
 
 > Header
 
