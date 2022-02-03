@@ -94,12 +94,6 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   Method: **_POST_** / Status code : `201`
 
-  #### Header
-
-  | Key           | Value                      |
-  | ------------- | -------------------------- |
-  | Authorization | Bearer < **_JWT token_** > |
-
   #### URL Parameters, Queries and Body payload
 
   | Key         | Type   | Default | Required | Key Type | Description    |
@@ -244,197 +238,197 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 - ### Get Categories list
 
-Get List of categories.
+  Get List of categories.
 
-Path: `/categories`
+  Path: `/categories`
 
-Method: **_GET_** / Status code : `200`
+  Method: **_GET_** / Status code : `200`
 
-> Examples
+  > Examples
 
-`/categories`
-list all categories.
+  `/categories`
+  list all categories.
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"data": {
-"results": 3,
-"categories": [
-{
-"id": 1,
-"name": "cat 1"
-},
-{
-"id": 2,
-"name": "cat 2"
-},
-{
-"id": 3,
-"name": "cat 3"
-}
-]
-}
+  {
+  "status": "success",
+  "data": {
+  "results": 3,
+  "categories": [
+  {
+  "id": 1,
+  "name": "cat 1"
+  },
+  {
+  "id": 2,
+  "name": "cat 2"
+  },
+  {
+  "id": 3,
+  "name": "cat 3"
+  }
+  ]
+  }
 
-```
+  ```
 
 - ### Create Category
 
-create category, **JWT user token** is required.
+  create category, **JWT user token** is required.
 
-Path: `/categories`
+  Path: `/categories`
 
-Method: **_POST_** / Status code : `201`
+  Method: **_POST_** / Status code : `201`
 
-#### Header
+  #### Header
 
-| Key           | Value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
 
-#### URL Parameters, Queries and Body payload
+  #### URL Parameters, Queries and Body payload
 
-| Key    | Type   | Default | Required | Key Type | Description    |
-| ------ | ------ | ------- | -------- | -------- | -------------- |
-| _name_ | string | -       | Yes      | Payload  | must be unique |
+  | Key    | Type   | Default | Required | Key Type | Description    |
+  | ------ | ------ | ------- | -------- | -------- | -------------- |
+  | _name_ | string | -       | Yes      | Payload  | must be unique |
 
-> Examples
+  > Examples
 
-`/categories`
-create category from json, need jwt user token.
+  `/categories`
+  create category from json, need jwt user token.
 
-> Payload JSON Example
+  > Payload JSON Example
 
-```
+  ```
 
-{
-"name": "category1"
-}
+  {
+  "name": "category1"
+  }
 
-```
+  ```
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
+  {
+  "status": "success",
+  "category": {
+  "id": 1,
+  "name": "category1"
+  }
+  }
 
-```
+  ```
 
 - ### Show Category
 
-Path: `/categories/:id`
+  Path: `/categories/:id`
 
-Method: **_get_** / Status code : `200`
+  Method: **_get_** / Status code : `200`
 
-#### URL Parameters, Queries and Body payload
+  #### URL Parameters, Queries and Body payload
 
-| Key  | Type | Default | Required | Key Type      | Description |
-| ---- | ---- | ------- | -------- | ------------- | ----------- |
-| _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
-> Examples
+  > Examples
 
-`/categories/1`
-return category with id: 1.
+  `/categories/1`
+  return category with id: 1.
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
+  {
+  "status": "success",
+  "category": {
+  "id": 1,
+  "name": "category1"
+  }
+  }
 
-```
+  ```
 
 - ### Delete Category
 
-Delete Category, **JWT user token** is required.
+  Delete Category, **JWT user token** is required.
 
-Path: `/categories/:id`
+  Path: `/categories/:id`
 
-Method: **_delete_** / Status code : `204`
+  Method: **_delete_** / Status code : `204`
 
-#### Header
+  #### Header
 
-| Key           | Value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
 
-#### URL Parameters, Queries and Body payload
+  #### URL Parameters, Queries and Body payload
 
-| Key  | Type | Default | Required | Key Type      | Description |
-| ---- | ---- | ------- | -------- | ------------- | ----------- |
-| _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
-> Examples
+  > Examples
 
-`/categories/1`
-delete category with id 1.
+  `/categories/1`
+  delete category with id 1.
 
 - ### Update Category
 
-update category name, **JWT user token** is required.
+  update category name, **JWT user token** is required.
 
-Path: `/categories/:id`
+  Path: `/categories/:id`
 
-Method: **_patch_** / Status code : `200`
+  Method: **_patch_** / Status code : `200`
 
-#### Header
+  #### Header
 
-| Key           | Value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-| Content-Type  | application/json           |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
 
-#### URL Parameters, Queries and Body payload
+  #### URL Parameters, Queries and Body payload
 
-| Key    | Type   | Default | Required | Key Type      | Description    |
-| ------ | ------ | ------- | -------- | ------------- | -------------- |
-| _id_   | int    | -       | Yes      | URL Parameter | must be > 0    |
-| _name_ | string | -       | Yes      | Payload       | must be unique |
+  | Key    | Type   | Default | Required | Key Type      | Description    |
+  | ------ | ------ | ------- | -------- | ------------- | -------------- |
+  | _id_   | int    | -       | Yes      | URL Parameter | must be > 0    |
+  | _name_ | string | -       | Yes      | Payload       | must be unique |
 
-> Examples
+  > Examples
 
-`/categories/1` update category with id 1 .
+  `/categories/1` update category with id 1 .
 
-> Payload JSON Example
+  > Payload JSON Example
 
-```
+  ```
 
-{
-"name": "newCategoryName"
-}
+  {
+  "name": "newCategoryName"
+  }
 
-```
+  ```
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
+  {
+  "status": "success",
+  "category": {
+  "id": 1,
+  "name": "category1"
+  }
+  }
 
-```
+  ```
 
 </details>
 
