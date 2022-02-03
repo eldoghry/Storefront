@@ -38,6 +38,404 @@ This repo contains a basic Node and Express app to get you started in constructi
 ## API Resources
 
 <details>
+    <summary> Users </summary>
+</details>
+
+<details>
+    <summary> Categories </summary>
+
+- ### Get Categories list
+
+  Path: `/categories`
+
+  Method: **_GET_** / Status code : `200`
+
+  > Examples
+
+  `/categories`
+  list all categories.
+
+  > Response Example
+
+  ```
+
+  {
+  "status": "success",
+  "data": {
+  "results": 3,
+  "categories": [
+  {
+  "id": 1,
+  "name": "cat 1"
+  },
+  {
+  "id": 2,
+  "name": "cat 2"
+  },
+  {
+  "id": 3,
+  "name": "cat 3"
+  }
+  ]
+  }
+
+  ```
+
+- ### Create Category
+
+  create category
+
+  Path: `/categories`
+
+  Method: **_POST_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type | key    | Type   | Default | Required | in URL | in Body | Description    |
+  | -------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
+  | body     | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+
+  > Examples
+
+  `/categories`
+  create category from json, need jwt user token.
+
+  > Payload JSON Example
+
+  ```
+
+  {
+  "name": "category1"
+  }
+
+  ```
+
+  > Response Example
+
+  ```
+
+  {
+  "status": "success",
+  "category": {
+  "id": 1,
+  "name": "category1"
+  }
+  }
+
+  ```
+
+- ### Show Category
+
+  Path: `/categories/:id`
+
+  Method: **_get_** / Status code : `200`
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/categories/1`
+  return category with id: 1.
+
+  > Response Example
+
+  ```
+
+  {
+  "status": "success",
+  "category": {
+  "id": 1,
+  "name": "category1"
+  }
+  }
+
+  ```
+
+- ### Delete Category
+
+  delete Category, JWT user token required.
+  Path: `/categories/:id`
+
+  Method: **_delete_** / Status code : `204`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/categories/1`
+  delete category with id 1.
+
+- ### Update Category
+
+  update category name
+
+  Path: `/categories/:id`
+
+  Method: **_patch_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key    | Type   | Default | Required | in URL | in Body | Description    |
+  | --------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
+  | parameter | _id_   | int    | -       | Yes      | Yes    | No      | must be > 0    |
+  | body      | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+
+  > Examples
+
+  `/categories/1` update category with id 1 .
+
+  > Payload JSON Example
+
+  ```
+
+  {
+  "name": "newCategoryName"
+  }
+
+  ```
+
+  > Response Example
+
+  ```
+
+  {
+    "status": "success",
+    "category": {
+        "id": 1,
+        "name": "category1"
+    }
+  }
+  ```
+
+  </details>
+
+<details>
+  <summary> Products </summary>
+   
+- ### Get Products list
+
+    Path: `/products`
+
+    Method: **_GET_** / Status code : `200`
+
+    > Examples
+
+    `/products`
+    get list of products.
+
+    > Response Example
+    ```
+    {
+    "status": "success",
+        "data": {
+            "results": 2,
+            "products": [
+                {
+                    "id": 1,
+                    "name": "product 1",
+                    "price": 100,
+                    "category_id": 1
+                },
+                {
+                    "id": 2,
+                    "name": "product 2",
+                    "price": 19,
+                    "category_id": 1
+                }
+            ]
+        }
+    }
+    ```
+
+- ### Create Product
+
+  create empty Product
+
+  Path: `/products`
+
+  Method: **_POST_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
+  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
+  | body     | _name_      | string | -       | Yes      | No     | Yes     | Product name                    |
+  | body     | _price_     | int    | -       | Yes      | No     | Yes     | Product price, must > 0         |
+  | body     | category_id | int    | -       | Yes      | No     | Yes     | Existing Category id , must > 0 |
+
+  > Examples
+
+  `/products`
+  create new product.
+
+  > Payload JSON Example
+
+  ```
+  {
+     "name": "Product 1",
+      "price": 55,
+      "category_id": 1
+  }
+  ```
+
+  > Response Example
+
+  ```
+  {
+    "status": "success",
+    "product": {
+        "id": 12,
+        "name": "product 1",
+        "price": 55,
+        "category_id": 1
+    }
+  }
+  ```
+
+- ### Show Product
+
+  Path: `/products/:id`
+
+  Method: **_get_** / Status code : `200`
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/products/1`
+  return product with id 1.
+
+  > Response Example
+
+  ```
+  {
+      "status": "success",
+      "product": {
+          "id": 1,
+          "name": "product 1",
+          "price": 100,
+          "category_id": 1
+      }
+  }
+  ```
+
+- ### Delete Product
+
+  delete product, **JWT user token is required**.
+
+  Path: `/products/:id`
+
+  Method: **_delete_** / Status code : `204`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/products/1`
+  delete product id: 1.
+
+- ### Update Product
+
+  update product name, price & category, **JWT user token is required**.
+
+  Path: `/products/:id`
+
+  Method: **_patch_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
+  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
+  | body     | _name_      | string | -       | Optional | No     | Yes     | Product name                    |
+  | body     | _price_     | int    | -       | Optional | No     | Yes     | Product price, must > 0         |
+  | body     | category_id | int    | -       | Optional | No     | Yes     | Existing Category id , must > 0 |
+
+  > Examples
+
+  `/products/1`
+  update product with id 1.
+
+  > Payload JSON Example
+
+  ```
+  {
+      "name": "new product 1",
+      "price": 105,
+      "category_id": 2
+  }
+
+  ```
+
+  > Response Example
+
+  ```
+  {
+      "status": "success",
+      "product": {
+          "id": 3,
+          "name": "new product 1",
+          "price": 105,
+          "category_id": 2
+      }
+  }
+  ```
+
+</details>
+<details>
     <summary> Orders </summary>
   
 - ### Get Orders list
@@ -320,403 +718,117 @@ This repo contains a basic Node and Express app to get you started in constructi
   ```
 
 </details>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <details>
-  <summary> Products </summary>
-   
-- ### Get Products list
+    <summary> Dashboard </summary>
 
-    Path: `/products`
+- ### Popular Products (add to cart)
 
-    Method: **_GET_** / Status code : `200`
+  Get most popular products
 
-    > Examples
-
-    `/products`
-    get list of products.
-
-    > Response Example
-    ```
-    {
-    "status": "success",
-        "data": {
-            "results": 2,
-            "products": [
-                {
-                    "id": 1,
-                    "name": "product 1",
-                    "price": 100,
-                    "category_id": 1
-                },
-                {
-                    "id": 2,
-                    "name": "product 2",
-                    "price": 19,
-                    "category_id": 1
-                }
-            ]
-        }
-    }
-    ```
-
-- ### Create Product
-
-  create empty Product
-
-  Path: `/products`
-
-  Method: **_POST_** / Status code : `201`
-
-  #### Header
-
-  | key           | value                      |
-  | ------------- | -------------------------- |
-  | Authorization | Bearer < **_JWT token_** > |
-
-  #### Parameters, Body & Queries
-
-  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
-  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
-  | body     | _name_      | string | -       | Yes      | No     | Yes     | Product name                    |
-  | body     | _price_     | int    | -       | Yes      | No     | Yes     | Product price, must > 0         |
-  | body     | category_id | int    | -       | Yes      | No     | Yes     | Existing Category id , must > 0 |
-
-  > Examples
-
-  `/products`
-  create new product.
-
-  > Payload JSON Example
-
-  ```
-  {
-     "name": "Product 1",
-      "price": 55,
-      "category_id": 1
-  }
-  ```
-
-  > Response Example
-
-  ```
-  {
-    "status": "success",
-    "product": {
-        "id": 12,
-        "name": "product 1",
-        "price": 55,
-        "category_id": 1
-    }
-  }
-  ```
-
-- ### Show Product
-
-  Path: `/products/:id`
+  Path: `/dashboard/products/popular/`
 
   Method: **_get_** / Status code : `200`
 
   #### Parameters, Body & Queries
 
-  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key Type | key   | Type   | Default | Required | in URL | in Body | Description           |
+  | -------- | ----- | ------ | ------- | -------- | ------ | ------- | --------------------- |
+  | query    | sort  | string | 'desc'  | Optional | Yes    | No      | must be (asc or desc) |
+  | query    | limit | int    | 5       | Optional | Yes    | No      | must be > 0           |
 
   > Examples
 
-  `/products/1`
-  return product with id 1.
+  `/dashboard/products/popular/?sort=desc&limit=5`
+  get top five popular products with desc order
 
   > Response Example
 
   ```
   {
       "status": "success",
-      "product": {
-          "id": 1,
-          "name": "product 1",
-          "price": 100,
-          "category_id": 1
+      "data": {
+          "results": 5,
+          "products": [
+              {
+                  "product_id": 9,
+                  "count": "10"
+              },
+              {
+                  "product_id": 3,
+                  "count": "5"
+              },
+              {
+                  "product_id": 4,
+                  "count": "3"
+              },
+              {
+                  "product_id": 2,
+                  "count": "2"
+              },
+              {
+                  "product_id": 1,
+                  "count": "1"
+              }
+          ]
       }
   }
   ```
 
-- ### Delete Product
+- ### Products with category
 
-  delete product, **JWT user token is required**.
-  Path: `/products/:id`
+  Get list of products with specific category
 
-  Method: **_delete_** / Status code : `204`
+  Path: `dashboard/products/category/:id`
 
-  #### Header
-
-  | key           | value                      |
-  | ------------- | -------------------------- |
-  | Authorization | Bearer < **_JWT token_** > |
+  Method: **_get_** / Status code : `200`
 
   #### Parameters, Body & Queries
 
-  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key Type  | key | Type | Default | Required | in URL | in Body | Description             |
+  | --------- | --- | ---- | ------- | -------- | ------ | ------- | ----------------------- |
+  | parameter | id  | int  | -       | Yes      | Yes    | No      | category id must be > 0 |
 
   > Examples
 
-  `/products/1`
-  delete product id: 1.
-
-- ### Update Product
-
-  update product name, price & category, **JWT user token is required**.
-
-  Path: `/products/:id`
-
-  Method: **_patch_** / Status code : `200`
-
-  #### Header
-
-  | key           | value                      |
-  | ------------- | -------------------------- |
-  | Authorization | Bearer < **_JWT token_** > |
-  | Content-Type  | application/json           |
-
-  #### Parameters, Body & Queries
-
-  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
-  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
-  | body     | _name_      | string | -       | Optional | No     | Yes     | Product name                    |
-  | body     | _price_     | int    | -       | Optional | No     | Yes     | Product price, must > 0         |
-  | body     | category_id | int    | -       | Optional | No     | Yes     | Existing Category id , must > 0 |
-
-  > Examples
-
-  `/products/1`
-  update product with id 1.
-
-  > Payload JSON Example
-
-  ```
-  {
-      "name": "new product 1",
-      "price": 105,
-      "category_id": 2
-  }
-
-  ```
+  `dashboard/products/category/1`
+  return products list which category id 1
 
   > Response Example
 
   ```
   {
-      "status": "success",
-      "product": {
-          "id": 3,
-          "name": "new product 1",
-          "price": 105,
-          "category_id": 2
-      }
+    "status": "success",
+    "data": {
+        "results": 4,
+        "products": [
+            {
+                "id": 2,
+                "name": "product 2",
+                "price": 19,
+                "category_name": "category1"
+            },
+            {
+                "id": 10,
+                "name": "cat1",
+                "price": 55,
+                "category_name": "category1"
+            },
+            {
+                "id": 11,
+                "name": "product 1",
+                "price": 55,
+                "category_name": "category1"
+            },
+            {
+                "id": 12,
+                "name": "product 1",
+                "price": 55,
+                "category_name": "category1"
+            }
+        ]
+    }
   }
   ```
 
 </details>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
-<details>
-    <summary> Users </summary>
-</details>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
-<details>
-    <summary> Categories </summary>
-
-- ### Get Categories list
-
-Path: `/categories`
-
-Method: **_GET_** / Status code : `200`
-
-> Examples
-
-`/categories`
-list all categories.
-
-> Response Example
-
-```
-
-{
-"status": "success",
-"data": {
-"results": 3,
-"categories": [
-{
-"id": 1,
-"name": "cat 1"
-},
-{
-"id": 2,
-"name": "cat 2"
-},
-{
-"id": 3,
-"name": "cat 3"
-}
-]
-}
-
-```
-
-- ### Create Category
-
-create category
-
-Path: `/categories`
-
-Method: **_POST_** / Status code : `201`
-
-#### Header
-
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-
-#### Parameters, Body & Queries
-
-| Key Type | key    | Type   | Default | Required | in URL | in Body | Description    |
-| -------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
-| body     | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
-
-> Examples
-
-`/categories`
-create category from json, need jwt user token.
-
-> Payload JSON Example
-
-```
-
-{
-"name": "category1"
-}
-
-```
-
-> Response Example
-
-```
-
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
-
-```
-
-- ### Show Category
-
-Path: `/categories/:id`
-
-Method: **_get_** / Status code : `200`
-
-#### Parameters, Body & Queries
-
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
-
-> Examples
-
-`/categories/1`
-return category with id: 1.
-
-> Response Example
-
-```
-
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
-
-```
-
-- ### Delete Category
-
-delete Category, JWT user token required.
-Path: `/categories/:id`
-
-Method: **_delete_** / Status code : `204`
-
-#### Header
-
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-
-#### Parameters, Body & Queries
-
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
-
-> Examples
-
-`/categories/1`
-delete category with id 1.
-
-- ### Update Category
-
-update category name
-
-Path: `/categories/:id`
-
-Method: **_patch_** / Status code : `200`
-
-#### Header
-
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-| Content-Type  | application/json           |
-
-#### Parameters, Body & Queries
-
-| Key Type  | key    | Type   | Default | Required | in URL | in Body | Description    |
-| --------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
-| parameter | _id_   | int    | -       | Yes      | Yes    | No      | must be > 0    |
-| body      | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
-
-> Examples
-
-`/categories/1` update category with id 1 .
-
-> Payload JSON Example
-
-```
-
-{
-"name": "newCategoryName"
-}
-
-```
-
-> Response Example
-
-```
-
-{
-"status": "success",
-"category": {
-"id": 1,
-"name": "category1"
-}
-}
-
-```
-
-</details>
-```
