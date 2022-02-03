@@ -50,7 +50,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   #### Header
 
-  | key           | value                      |
+  | Key           | Value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
 
@@ -96,18 +96,18 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   #### Header
 
-  | key           | value                      |
+  | Key           | Value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
 
-  #### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-  | Key Type | key         | Type   | Default | Required | in URL | in Body | Description    |
-  | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | -------------- |
-  | body     | _username_  | string | -       | Yes      | No     | Yes     | must be unique |
-  | body     | _firstname_ | string | -       | Yes      | No     | Yes     | -              |
-  | body     | _lastname_  | string | -       | Yes      | No     | Yes     | -              |
-  | body     | _password_  | string | -       | Yes      | No     | Yes     | -              |
+  | Key         | Type   | Default | Required | Key Type | Description    |
+  | ----------- | ------ | ------- | -------- | -------- | -------------- |
+  | _username_  | string | -       | Yes      | Payload  | must be unique |
+  | _firstname_ | string | -       | Yes      | Payload  | -              |
+  | _lastname_  | string | -       | Yes      | Payload  | -              |
+  | _password_  | string | -       | Yes      | Payload  | -              |
 
   > Examples
 
@@ -144,15 +144,15 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   #### Header
 
-  | key           | value                      |
+  | Key           | Value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
 
-  #### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
   > Examples
 
@@ -178,21 +178,22 @@ This repo contains a basic Node and Express app to get you started in constructi
 - ### Delete User
 
   delete user, **JWT user token** is required.
+
   Path: `/users/:id`
 
   Method: **_delete_** / Status code : `204`
 
   #### Header
 
-  | key           | value                      |
+  | Key           | Value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
 
-  #### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
   > Examples
 
@@ -205,20 +206,14 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   Path: `/users/login`
 
-  Method: **_get_** / Status code : `200`
+  Method: **_post_** / Status code : `200`
 
-  #### Header
+  #### URL Parameters, Queries and Body payload
 
-  | key           | value                      |
-  | ------------- | -------------------------- |
-  | Authorization | Bearer < **_JWT token_** > |
-
-  #### Parameters, Body & Queries
-
-  | Key Type | key        | Type   | Default | Required | in URL | in Body | Description |
-  | -------- | ---------- | ------ | ------- | -------- | ------ | ------- | ----------- |
-  | body     | _username_ | string | -       | Yes      | No     | Yes     | -           |
-  | body     | _password_ | string | -       | Yes      | No     | Yes     | -           |
+  | Key        | Type   | Default | Required | Key Type | Description |
+  | ---------- | ------ | ------- | -------- | -------- | ----------- |
+  | _username_ | string | -       | Yes      | Payload  | -           |
+  | _password_ | string | -       | Yes      | Payload  | -           |
 
   > Examples
 
@@ -248,6 +243,8 @@ This repo contains a basic Node and Express app to get you started in constructi
   <summary> Categories </summary>
 
 - ### Get Categories list
+
+Get List of categories.
 
 Path: `/categories`
 
@@ -286,7 +283,7 @@ list all categories.
 
 - ### Create Category
 
-create category
+create category, **JWT user token** is required.
 
 Path: `/categories`
 
@@ -294,15 +291,15 @@ Method: **_POST_** / Status code : `201`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type | key    | Type   | Default | Required | in URL | in Body | Description    |
-| -------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
-| body     | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+| Key    | Type   | Default | Required | Key Type | Description    |
+| ------ | ------ | ------- | -------- | -------- | -------------- |
+| _name_ | string | -       | Yes      | Payload  | must be unique |
 
 > Examples
 
@@ -339,11 +336,11 @@ Path: `/categories/:id`
 
 Method: **_get_** / Status code : `200`
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+| Key  | Type | Default | Required | Key Type      | Description |
+| ---- | ---- | ------- | -------- | ------------- | ----------- |
+| _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
 > Examples
 
@@ -366,22 +363,23 @@ return category with id: 1.
 
 - ### Delete Category
 
-delete Category, JWT user token required.
+Delete Category, **JWT user token** is required.
+
 Path: `/categories/:id`
 
 Method: **_delete_** / Status code : `204`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+| Key  | Type | Default | Required | Key Type      | Description |
+| ---- | ---- | ------- | -------- | ------------- | ----------- |
+| _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
 > Examples
 
@@ -390,7 +388,7 @@ delete category with id 1.
 
 - ### Update Category
 
-update category name
+update category name, **JWT user token** is required.
 
 Path: `/categories/:id`
 
@@ -398,17 +396,17 @@ Method: **_patch_** / Status code : `200`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 | Content-Type  | application/json           |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type  | key    | Type   | Default | Required | in URL | in Body | Description    |
-| --------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
-| parameter | _id_   | int    | -       | Yes      | Yes    | No      | must be > 0    |
-| body      | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+| Key    | Type   | Default | Required | Key Type      | Description    |
+| ------ | ------ | ------- | -------- | ------------- | -------------- |
+| _id_   | int    | -       | Yes      | URL Parameter | must be > 0    |
+| _name_ | string | -       | Yes      | Payload       | must be unique |
 
 > Examples
 
@@ -444,6 +442,8 @@ Method: **_patch_** / Status code : `200`
 <summary> Products </summary>
 
 - ### Get Products list
+
+  get products list.
 
   Path: `/products`
 
@@ -481,7 +481,7 @@ Method: **_patch_** / Status code : `200`
 
 - ### Create Product
 
-create empty Product
+create empty Product, **JWT user token** is required.
 
 Path: `/products`
 
@@ -489,17 +489,17 @@ Method: **_POST_** / Status code : `201`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
-| -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
-| body     | _name_      | string | -       | Yes      | No     | Yes     | Product name                    |
-| body     | _price_     | int    | -       | Yes      | No     | Yes     | Product price, must > 0         |
-| body     | category_id | int    | -       | Yes      | No     | Yes     | Existing Category id , must > 0 |
+| Key         | Type   | Default | Required | Key Type | Description                     |
+| ----------- | ------ | ------- | -------- | -------- | ------------------------------- |
+| _name_      | string | -       | Yes      | Payload  | Product name                    |
+| _price_     | int    | -       | Yes      | Payload  | Product price, must > 0         |
+| category_id | int    | -       | Yes      | Payload  | Existing Category id , must > 0 |
 
 > Examples
 
@@ -540,9 +540,9 @@ Path: `/products/:id`
 
 Method: **_get_** / Status code : `200`
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+| Key Type  | Key  | Type | Default | Required | Key Type | in payload | Description |
 | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
 | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
 
@@ -577,13 +577,13 @@ Method: **_delete_** / Status code : `204`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+| Key Type  | Key  | Type | Default | Required | Key Type | in payload | Description |
 | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
 | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
 
@@ -602,18 +602,18 @@ Method: **_patch_** / Status code : `200`
 
 #### Header
 
-| key           | value                      |
+| Key           | Value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 | Content-Type  | application/json           |
 
-#### Parameters, Body & Queries
+#### URL Parameters, Queries and Body payload
 
-| Key Type | key         | Type   | Default | Required | in URL | in Body | Description                     |
+| Key Type | Key         | Type   | Default | Required | Key Type | in payload | Description                     |
 | -------- | ----------- | ------ | ------- | -------- | ------ | ------- | ------------------------------- |
-| body     | _name_      | string | -       | Optional | No     | Yes     | Product name                    |
-| body     | _price_     | int    | -       | Optional | No     | Yes     | Product price, must > 0         |
-| body     | category_id | int    | -       | Optional | No     | Yes     | Existing Category id , must > 0 |
+| payload     | _name_      | string | -       | Optional | No     | Yes     | Product name                    |
+| payload     | _price_     | int    | -       | Optional | No     | Yes     | Product price, must > 0         |
+| payload     | category_id | int    | -       | Optional | No     | Yes     | Existing Category id , must > 0 |
 
 > Examples
 
@@ -654,22 +654,23 @@ update product with id 1.
 
 - ### Get Orders list
 
+  getting list of active and completed orders, **JWT user token** is required.
+
   Path: `/orders`
 
   Method: **_GET_** / Status code : `200`
 
   #### Header
 
-  | key           | value                      |
+  | Key           | Value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
-  | Content-Type  | application/json           |
 
-  #### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-  | Key Type | key      | Type   | Default | Required | in URL | in Body | Description                  |
-  | -------- | -------- | ------ | ------- | -------- | ------ | ------- | ---------------------------- |
-  | query    | _status_ | string | -       | No       | Yes    | No      | must be (active or complete) |
+  | Key      | Type   | Default | Required | Key Type  | Description                  |
+  | -------- | ------ | ------- | -------- | --------- | ---------------------------- |
+  | _status_ | string | -       | No       | URL Query | must be (active or complete) |
 
   > Examples
 
@@ -707,360 +708,354 @@ update product with id 1.
 
 - ### Create Order
 
-create empty order
+  create empty order, **JWT user token** is required.
 
-Path: `/orders`
+  Path: `/orders`
 
-Method: **_POST_** / Status code : `201`
+  Method: **_POST_** / Status code : `201`
 
-#### Header
+  #### Header
 
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
 
-> Examples
+  > Examples
 
-`/orders`
-list of active and completed orders that related to user.
+  `/orders`
+  list of active and completed orders that related to user.
 
-> Response Example
+  > Response Example
 
-````
+  ```
+  {
+  "status": "success",
+  "order": {
+  "id": 1,
+  "status": "active",
+  "user_id": 1
+  }
+  }
 
-{
-"status": "success",
-"order": {
-"id": 1,
-"status": "active",
-"user_id": 1
-}
-}
-
-```
+  ```
 
 - ### Show Order
 
-show order that related to jwt user with products list that in it.
-Path: `/orders/:id`
+  show order that related to jwt user with products list that in it, **JWT user token** is required.
 
-Method: **_get_** / Status code : `200`
+  Path: `/orders/:id`
 
-#### Header
+  Method: **_get_** / Status code : `200`
 
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-| Content-Type  | application/json           |
+  #### Header
 
-#### Parameters, Body & Queries
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  #### URL Parameters, Queries and Body payload
 
-> Examples
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
-`/orders/1`
-return order with products.
+  > Examples
 
-> Response Example
+  `/orders/1`
+  return order with products.
 
-```
+  > Response Example
 
-{
-"status": "success",
-"order": {
-"id": 5,
-"status": "active",
-"user_id": 1
-},
-"cart": [
-{
-"product_id": 1,
-"name": "product 1",
-"quantity": 6
-},
-{
-"product_id": 2,
-"name": "product 2",
-"quantity": 6
-}
-]
-}
+  ```
 
-```
+  {
+  "status": "success",
+  "order": {
+  "id": 5,
+  "status": "active",
+  "user_id": 1
+  },
+  "cart": [
+  {
+  "product_id": 1,
+  "name": "product 1",
+  "quantity": 6
+  },
+  {
+  "product_id": 2,
+  "name": "product 2",
+  "quantity": 6
+  }
+  ]
+  }
+
+  ```
 
 - ### Delete Order
 
-delete order that related to jwt user.
-Path: `/orders/:id`
+  delete order that related to jwt user, **JWT user token** is required.
+  Path: `/orders/:id`
 
-Method: **_delete_** / Status code : `204`
+  Method: **_delete_** / Status code : `204`
 
-#### Header
+  #### Header
 
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
 
-#### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-| Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key  | Type | Default | Required | Key Type      | Description |
+  | ---- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_ | int  | -       | Yes      | URL Parameter | must be > 0 |
 
-> Examples
+  > Examples
 
-`/orders/1`
-delete order with products.
+  `/orders/1`
+  delete order with products.
 
 - ### Update Order
 
-change order status from active to complete( allowed if order have products)
-or change from complete to active
+  change order status from active to complete( allowed if order have products)
+  or change from complete to active, **JWT user token** is required.
 
-Path: `/orders/:id`
+  Path: `/orders/:id`
 
-Method: **_patch_** / Status code : `200`
+  Method: **_patch_** / Status code : `200`
 
-#### Header
+  #### Header
 
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-| Content-Type  | application/json           |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
 
-#### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-| Key Type  | key      | Type   | Default | Required | in URL | in Body | Description                  |
-| --------- | -------- | ------ | ------- | -------- | ------ | ------- | ---------------------------- |
-| parameter | _id_     | int    | -       | Yes      | Yes    | No      | must be > 0                  |
-| body      | _status_ | string | -       | Yes      | No     | Yes     | must be (active or complete) |
+  | Key      | Type   | Default | Required | Key Type       | Description                  |
+  | -------- | ------ | ------- | -------- | -------------- | ---------------------------- |
+  | _id_     | int    | -       | Yes      | URL Paramerter | must be > 0                  |
+  | _status_ | string | -       | Yes      | Payload        | must be (active or complete) |
 
-> Examples
+  > Examples
 
-`/orders/1`
-return order with products.
+  `/orders/1`
+  return order with products.
 
-> Payload JSON Example
+  > Payload JSON Example
 
-```
+  ```
+  {
+  "status": "complete"
+  }
+  ```
 
-{
-"status": "complete"
-}
+  > Response Example
 
-```
+  ```
+  {
+  "status": "success",
+  "order": {
+  "id": 5,
+  "status": "complete",
+  "user_id": 1
+  },
+  "cart": [
+  {
+  "product_id": 1,
+  "name": "product 1",
+  "quantity": 6
+  },
+  {
+  "product_id": 2,
+  "name": "product 2",
+  "quantity": 6
+  }
+  ]
+  }
 
-> Response Example
-
-```
-
-{
-"status": "success",
-"order": {
-"id": 5,
-"status": "complete",
-"user_id": 1
-},
-"cart": [
-{
-"product_id": 1,
-"name": "product 1",
-"quantity": 6
-},
-{
-"product_id": 2,
-"name": "product 2",
-"quantity": 6
-}
-]
-}
-
-```
+  ```
 
 - ### Add Product to Active Order (add to cart)
 
-adding product to active order
+  adding product to active order, **JWT user token** is required.
 
-Path: `/orders/:id/products`
+  Path: `/orders/:id/products`
 
-Method: **_post_** / Status code : `201`
+  Method: **_post_** / Status code : `201`
 
-#### Header
+  #### Header
 
-| key           | value                      |
-| ------------- | -------------------------- |
-| Authorization | Bearer < **_JWT token_** > |
-| Content-Type  | application/json           |
+  | Key           | Value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
 
-#### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-| Key Type  | key        | Type | Default | Required | in URL | in Body | Description |
-| --------- | ---------- | ---- | ------- | -------- | ------ | ------- | ----------- |
-| parameter | _id_       | int  | -       | Yes      | Yes    | No      | must be > 0 |
-| body      | product_id | int  | -       | Yes      | No     | Yes     | must be > 0 |
-| body      | quantity   | int  | -       | Yes      | No     | Yes     | must be > 0 |
+  | Key        | Type | Default | Required | Key Type      | Description |
+  | ---------- | ---- | ------- | -------- | ------------- | ----------- |
+  | _id_       | int  | -       | Yes      | URL Parameter | must be > 0 |
+  | product_id | int  | -       | Yes      | Payload       | must be > 0 |
+  | quantity   | int  | -       | Yes      | Payload       | must be > 0 |
 
-> Examples
+  > Examples
 
-`/orders/1/products`
-add product json to order.
+  `/orders/1/products`
+  add product json to order.
 
-> Payload JSON Example
+  > Payload JSON Example
 
-```
+  ```
 
-{
-"quantity": 6,
-"product_id" :5
-}
+  {
+  "quantity": 6,
+  "product_id" :5
+  }
 
-```
+  ```
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"cart": {
-"order": {
-"id": 1,
-"status": "active",
-"user_id": 1
-},
-"products": [
-{
-"product_id": 5,
-"name": "product 5",
-"quantity": 6
-}
-]
-}
-}
+  {
+  "status": "success",
+  "cart": {
+  "order": {
+  "id": 1,
+  "status": "active",
+  "user_id": 1
+  },
+  "products": [
+  {
+  "product_id": 5,
+  "name": "product 5",
+  "quantity": 6
+  }
+  ]
+  }
+  }
 
-```
+  ```
 
 </details>
 
 <details>
   <summary> Dashboard </summary>
 
-- ### Popular Products (add to cart)
+- ### Popular Products
 
-Get most popular products
+  Get most popular products
 
-Path: `/dashboard/products/popular/`
+  Path: `/dashboard/products/popular/`
 
-Method: **_get_** / Status code : `200`
+  Method: **_get_** / Status code : `200`
 
-#### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-| Key Type | key   | Type   | Default | Required | in URL | in Body | Description           |
-| -------- | ----- | ------ | ------- | -------- | ------ | ------- | --------------------- |
-| query    | sort  | string | 'desc'  | Optional | Yes    | No      | must be (asc or desc) |
-| query    | limit | int    | 5       | Optional | Yes    | No      | must be > 0           |
+  | Key   | Type   | Default | Required | Key Type  | Description           |
+  | ----- | ------ | ------- | -------- | --------- | --------------------- |
+  | sort  | string | 'desc'  | Optional | URL Query | must be (asc or desc) |
+  | limit | int    | 5       | Optional | URL Query | must be > 0           |
 
-> Examples
+  > Examples
 
-`/dashboard/products/popular/?sort=desc&limit=5`
-get top five popular products with desc order
+  `/dashboard/products/popular/?sort=desc&limit=5`
+  get top five popular products with desc order
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"data": {
-"results": 5,
-"products": [
-{
-"product_id": 9,
-"count": "10"
-},
-{
-"product_id": 3,
-"count": "5"
-},
-{
-"product_id": 4,
-"count": "3"
-},
-{
-"product_id": 2,
-"count": "2"
-},
-{
-"product_id": 1,
-"count": "1"
-}
-]
-}
-}
+  {
+  "status": "success",
+  "data": {
+  "results": 5,
+  "products": [
+  {
+  "product_id": 9,
+  "count": "10"
+  },
+  {
+  "product_id": 3,
+  "count": "5"
+  },
+  {
+  "product_id": 4,
+  "count": "3"
+  },
+  {
+  "product_id": 2,
+  "count": "2"
+  },
+  {
+  "product_id": 1,
+  "count": "1"
+  }
+  ]
+  }
+  }
 
-```
+  ```
 
 - ### Products with category
 
-Get list of products with specific category
+  Get list of products with specific category
 
-Path: `dashboard/products/category/:id`
+  Path: `dashboard/products/category/:id`
 
-Method: **_get_** / Status code : `200`
+  Method: **_get_** / Status code : `200`
 
-#### Parameters, Body & Queries
+  #### URL Parameters, Queries and Body payload
 
-| Key Type  | key | Type | Default | Required | in URL | in Body | Description             |
-| --------- | --- | ---- | ------- | -------- | ------ | ------- | ----------------------- |
-| parameter | id  | int  | -       | Yes      | Yes    | No      | category id must be > 0 |
+  | Key | Type | Default | Required | Key Type      | Description             |
+  | --- | ---- | ------- | -------- | ------------- | ----------------------- |
+  | id  | int  | -       | Yes      | URL Parameter | category id must be > 0 |
 
-> Examples
+  > Examples
 
-`dashboard/products/category/1`
-return products list which category id 1
+  `dashboard/products/category/1`
+  return products list which category id 1
 
-> Response Example
+  > Response Example
 
-```
+  ```
 
-{
-"status": "success",
-"data": {
-"results": 4,
-"products": [
-{
-"id": 2,
-"name": "product 2",
-"price": 19,
-"category_name": "category1"
-},
-{
-"id": 10,
-"name": "cat1",
-"price": 55,
-"category_name": "category1"
-},
-{
-"id": 11,
-"name": "product 1",
-"price": 55,
-"category_name": "category1"
-},
-{
-"id": 12,
-"name": "product 1",
-"price": 55,
-"category_name": "category1"
-}
-]
-}
-}
+  {
+  "status": "success",
+  "data": {
+  "results": 4,
+  "products": [
+  {
+  "id": 2,
+  "name": "product 2",
+  "price": 19,
+  "category_name": "category1"
+  },
+  {
+  "id": 10,
+  "name": "cat1",
+  "price": 55,
+  "category_name": "category1"
+  },
+  {
+  "id": 11,
+  "name": "product 1",
+  "price": 55,
+  "category_name": "category1"
+  },
+  {
+  "id": 12,
+  "name": "product 1",
+  "price": 55,
+  "category_name": "category1"
+  }
+  ]
+  }
+  }
 
-```
+  ```
 
 </details>
-```
-````
