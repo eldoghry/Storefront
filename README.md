@@ -54,6 +54,6 @@ status code : `200`
 
 > Examples
 
-    - `/orders` list of active and completed orders that related to user
-    - `/orders/?status=complete` list of completed orders that related to user
-    -`/orders/?status=active` list of active orders that related to user
+    `/orders` list of active and completed orders that related to user.
+    `/orders/?status=complete` list of completed orders that related to user.
+    `/orders/?status=active` list of active orders that related to user.
