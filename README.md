@@ -37,22 +37,20 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 ## Orders
 
-#### Get Orders list
+### Get Orders list
 
 Path: `/orders`
 
-Method: **_GET_**
+Method: **_GET_** / Status code : `200`
 
-status code : `200`
-
-> Header
+#### Header
 
 | key           | value                      |
 | ------------- | -------------------------- |
 | Authorization | Bearer < **_JWT token_** > |
 | Content-Type  | application/json           |
 
-> Parameters & Queries
+#### Parameters & Queries
 
 | key      | Type   | Default | Required | Description                  |
 | -------- | ------ | ------- | -------- | ---------------------------- |
