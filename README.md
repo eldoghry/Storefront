@@ -35,8 +35,10 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   run `db-migrate up` in terminal.
 
+## API Resources
+
 <details>
-<summary> Orders </summary>
+    <summary> Orders </summary>
   
 - ### Get Orders list
 
@@ -68,7 +70,7 @@ This repo contains a basic Node and Express app to get you started in constructi
     `/orders/?status=active`
     list of active orders that related to user.
 
-    > Return Example
+    > Response Example
 
     ```
     {
@@ -110,7 +112,7 @@ This repo contains a basic Node and Express app to get you started in constructi
   `/orders`
   list of active and completed orders that related to user.
 
-  > Return Example
+  > Response Example
 
   ```
   {
@@ -148,7 +150,7 @@ This repo contains a basic Node and Express app to get you started in constructi
   `/orders/1`
   return order with products.
 
-  > Return Example
+  > Response Example
 
   ```
   {
@@ -225,7 +227,15 @@ This repo contains a basic Node and Express app to get you started in constructi
   `/orders/1`
   return order with products.
 
-  > Return Example
+  > Payload JSON Example
+
+  ```
+  {
+      "status": "complete"
+  }
+  ```
+
+  > Response Example
 
   ```
   {
@@ -278,7 +288,7 @@ This repo contains a basic Node and Express app to get you started in constructi
   `/orders/1/products`
   add product json to order.
 
-  Body json example
+  > Payload JSON Example
 
   ```
   {
@@ -287,7 +297,7 @@ This repo contains a basic Node and Express app to get you started in constructi
   }
   ```
 
-  > Return Example
+  > Response Example
 
   ```
   {
@@ -310,11 +320,191 @@ This repo contains a basic Node and Express app to get you started in constructi
   ```
 
 </details>
-
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
 <details>
   <summary> Users </summary>
 </details>
-
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
 <details>
   <summary> Categories </summary>
-</details>
+  
+- ### Get Categories list
+
+    Path: `/categories`
+
+    Method: **_GET_** / Status code : `200`
+
+    > Examples
+
+    `/categories`
+    list all categories.
+
+    > Response Example
+
+    ```
+    {
+    "status": "success",
+    "data": {
+        "results": 3,
+        "categories": [
+            {
+                "id": 1,
+                "name": "cat 1"
+            },
+            {
+                "id": 2,
+                "name": "cat 2"
+            },
+            {
+                "id": 3,
+                "name": "cat 3"
+            }
+        ]
+    }
+    ```
+
+- ### Create Category
+
+  create category
+
+  Path: `/categories`
+
+  Method: **_POST_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type | key    | Type   | Default | Required | in URL | in Body | Description    |
+  | -------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
+  | body     | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+
+  > Examples
+
+  `/categories`
+  create category from json, need jwt user token.
+
+  > JSON Body Example
+
+  ```
+  {
+  "name": "category1"
+  }
+  ```
+
+  > Response Example
+
+  ```
+  {
+      "status": "success",
+      "category": {
+          "id": 1,
+          "name": "category1"
+      }
+  }
+  ```
+
+- ### Show Category
+
+  Path: `/categories/:id`
+
+  Method: **_get_** / Status code : `200`
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/categories/1`
+  return category with id: 1.
+
+  > Response Example
+
+  ```
+  {
+    "status": "success",
+    "category": {
+        "id": 1,
+        "name": "category1"
+    }
+  }
+  ```
+
+- ### Delete Category
+
+  delete Category, JWT user token required.
+  Path: `/categories/:id`
+
+  Method: **_delete_** / Status code : `204`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/categories/1`
+  delete category with id 1.
+
+- ### Update Category
+
+  update category name
+
+  Path: `/categories/:id`
+
+  Method: **_patch_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key    | Type   | Default | Required | in URL | in Body | Description    |
+  | --------- | ------ | ------ | ------- | -------- | ------ | ------- | -------------- |
+  | parameter | _id_   | int    | -       | Yes      | Yes    | No      | must be > 0    |
+  | body      | _name_ | string | -       | Yes      | No     | Yes     | must be unique |
+
+  > Examples
+
+  `/categories/1` update category with id 1 .
+
+  > Payload JSON Example
+
+  ```
+  {
+    "name": "newCategoryName"
+  }
+  ```
+
+  > Response Example
+
+  ```
+  {
+      "status": "success",
+      "category": {
+          "id": 1,
+          "name": "category1"
+      }
+  }
+  ```
+
+  </details>
