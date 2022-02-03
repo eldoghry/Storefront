@@ -50,11 +50,11 @@ This repo contains a basic Node and Express app to get you started in constructi
   | Authorization | Bearer < **_JWT token_** > |
   | Content-Type  | application/json           |
 
-  #### Parameters & Queries
+  #### Parameters, Body & Queries
 
-  | key      | Type   | Default | Required | Description                  |
-  | -------- | ------ | ------- | -------- | ---------------------------- |
-  | _status_ | string | **-**   | No       | must be (active or complete) |
+  | Key Type | key      | Type   | Default | Required | in URL | in Body | Description                  |
+  | -------- | -------- | ------ | ------- | -------- | ------ | ------- | ---------------------------- |
+  | query    | _status_ | string | -       | No       | Yes    | No      | must be (active or complete) |
 
   > Examples
 
@@ -90,8 +90,9 @@ This repo contains a basic Node and Express app to get you started in constructi
   }
   ```
 
-  - ### Create Order
-    create empty order
+- ### Create Order
+
+  create empty order
 
   Path: `/orders`
 
@@ -102,7 +103,6 @@ This repo contains a basic Node and Express app to get you started in constructi
   | key           | value                      |
   | ------------- | -------------------------- |
   | Authorization | Bearer < **_JWT token_** > |
-  | Content-Type  | application/json           |
 
   > Examples
 
@@ -118,6 +118,192 @@ This repo contains a basic Node and Express app to get you started in constructi
         "id": 1,
         "status": "active",
         "user_id": 1
+    }
+  }
+  ```
+
+- ### Show Order
+
+  show order that related to jwt user with products list that in it.
+  Path: `/orders/:id`
+
+  Method: **_get_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/orders/1`
+  return order with products.
+
+  > Return Example
+
+  ```
+  {
+    "status": "success",
+    "order": {
+        "id": 5,
+        "status": "active",
+        "user_id": 1
+    },
+    "cart": [
+        {
+            "product_id": 1,
+            "name": "product 1",
+            "quantity": 6
+        },
+        {
+            "product_id": 2,
+            "name": "product 2",
+            "quantity": 6
+        }
+    ]
+  }
+  ```
+
+- ### Delete Order
+
+  delete order that related to jwt user.
+  Path: `/orders/:id`
+
+  Method: **_delete_** / Status code : `204`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+
+  > Examples
+
+  `/orders/1`
+  delete order with products.
+
+- ### Update Order
+
+  change order status from active to complete( allowed if order have products)
+  or change from complete to active
+
+  Path: `/orders/:id`
+
+  Method: **_patch_** / Status code : `200`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key      | Type   | Default | Required | in URL | in Body | Description                  |
+  | --------- | -------- | ------ | ------- | -------- | ------ | ------- | ---------------------------- |
+  | parameter | _id_     | int    | -       | Yes      | Yes    | No      | must be > 0                  |
+  | body      | _status_ | string | -       | Yes      | No     | Yes     | must be (active or complete) |
+
+  > Examples
+
+  `/orders/1`
+  return order with products.
+
+  > Return Example
+
+  ```
+  {
+    "status": "success",
+    "order": {
+        "id": 5,
+        "status": "complete",
+        "user_id": 1
+    },
+    "cart": [
+        {
+            "product_id": 1,
+            "name": "product 1",
+            "quantity": 6
+        },
+        {
+            "product_id": 2,
+            "name": "product 2",
+            "quantity": 6
+        }
+    ]
+  }
+  ```
+
+- ### Add Product to Active Order (add to cart)
+
+  adding product to active order
+
+  Path: `/orders/:id/products`
+
+  Method: **_post_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  #### Parameters, Body & Queries
+
+  | Key Type  | key        | Type | Default | Required | in URL | in Body | Description |
+  | --------- | ---------- | ---- | ------- | -------- | ------ | ------- | ----------- |
+  | parameter | _id_       | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | body      | product_id | int  | -       | Yes      | No     | Yes     | must be > 0 |
+  | body      | quantity   | int  | -       | Yes      | No     | Yes     | must be > 0 |
+
+  > Examples
+
+  `/orders/1/products`
+  add product json to order.
+
+  Body json example
+
+  ```
+  {
+    "quantity": 6,
+    "product_id" :5
+  }
+  ```
+
+  > Return Example
+
+  ```
+  {
+    "status": "success",
+    "cart": {
+        "order": {
+            "id": 1,
+            "status": "active",
+            "user_id": 1
+        },
+        "products": [
+            {
+                "product_id": 5,
+                "name": "product 5",
+                "quantity": 6
+            }
+        ]
     }
   }
   ```
