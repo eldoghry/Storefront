@@ -1,5 +1,5 @@
 export default interface order {
-  id: number;
+  readonly id: number;
   status: string;
-  user_id: number;
+  readonly user_id: number;
 }

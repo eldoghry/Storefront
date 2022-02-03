@@ -68,7 +68,7 @@ export default class UserStore {
   async login(username: string, password: string): Promise<user | null> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM users WHERE username = $1 `;
+      const sql = `SELECT * FROM users WHERE username = $1`;
       const results = await con.query(sql, [username]);
       con.release();
 
@@ -76,7 +76,7 @@ export default class UserStore {
       const pepper: string = process.env.BCRYPT_PASSWORD as string;
 
       const isPasswordCorrect: boolean = await bcrypt.compare(password + pepper, user.password_digest);
-      console.log(isPasswordCorrect);
+
       if (isPasswordCorrect) return results.rows[0];
       else return null;
     } catch (err) {

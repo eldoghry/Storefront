@@ -11,6 +11,7 @@ import validateLoginUserProperties from '../middleware/user/validateLoginUserPro
 const router = express.Router();
 
 const checkAuthToken = [isAuthTokenExist, isAuthTokenValid, authenticatUser]; //user exist, credientials correct
+
 const checkAuthorizedToken = [isAuthTokenExist, isAuthTokenValid, authenticatUser, authorizeUser]; //user exist, credientials correct, permission correct
 
 router.route('/').get(checkAuthToken, handler.index).post(validateNewUserProperties, handler.create);

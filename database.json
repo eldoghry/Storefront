@@ -1,9 +1,33 @@
 {
   "dev": {
     "driver": "pg",
-    "host": "127.0.0.1",
-    "database": "storefront",
-    "user": "magdy",
-    "password": "password123"
+    "host": {
+      "ENV": "DATABASE_HOST"
+    },
+    "database": {
+      "ENV": "DATABASE_NAME"
+    },
+    "user": {
+      "ENV": "DATABASE_USER"
+    },
+    "password": {
+      "ENV": "DATABASE_PASSWORD"
+    }
+  },
+
+  "test": {
+    "driver": "pg",
+    "host": {
+      "ENV": "DATABASE_HOST"
+    },
+    "database": {
+      "ENV": "DATABASE_TEST_NAME"
+    },
+    "user": {
+      "ENV": "DATABASE_USER"
+    },
+    "password": {
+      "ENV": "DATABASE_PASSWORD"
+    }
   }
 }
