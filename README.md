@@ -35,66 +35,89 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   run `db-migrate up` in terminal.
 
-<details open>
-<summary open>Storefront Resources</summary>
-    <ul>
-        <li> 
-            <details>
-                <summary>Orders</summary>
-                #### Get Orders list
+## Orders
 
-                Path: `/orders`
+- ### Get Orders list
 
-                Method: **_GET_** / Status code : `200`
+  Path: `/orders`
 
-                #### Header
+  Method: **_GET_** / Status code : `200`
 
-                | key           | value                      |
-                | ------------- | -------------------------- |
-                | Authorization | Bearer  **_JWT token_** |
-                | Content-Type  | application/json           |
+  #### Header
 
-                #### Parameters & Queries
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
 
-                | key      | Type   | Default | Required | Description                  |
-                | -------- | ------ | ------- | -------- | ---------------------------- |
-                | _status_ | string | **-**   | No       | must be (active or complete) |
+  #### Parameters & Queries
 
-                > Examples
+  | key      | Type   | Default | Required | Description                  |
+  | -------- | ------ | ------- | -------- | ---------------------------- |
+  | _status_ | string | **-**   | No       | must be (active or complete) |
 
-                `/orders`
-                list of active and completed orders that related to user.
+  > Examples
 
-                `/orders/?status=complete`
-                list of completed orders that related to user.
+  `/orders`
+  list of active and completed orders that related to user.
 
-                `/orders/?status=active`
-                list of active orders that related to user.
+  `/orders/?status=complete`
+  list of completed orders that related to user.
 
-                > Return Example
+  `/orders/?status=active`
+  list of active orders that related to user.
 
-                ```
-                {
-                    "status": "success",
-                    "data": {
-                        "results": 1,
-                        "orders": [
-                            {
-                                "id": 1,
-                                "status": "complete",
-                                "user_id": 1
-                            },
-                            {
-                                "id": 2,
-                                "status": "active",
-                                "user_id": 1
-                            }
-                        ]
-                    }
-                }
-                ```
-            </details>
-        </li>
-    </ul>
+  > Return Example
 
-</details>
+  ```
+  {
+      "status": "success",
+      "data": {
+          "results": 2,
+          "orders": [
+              {
+                  "id": 1,
+                  "status": "complete",
+                  "user_id": 1
+              },
+              {
+                  "id": 2,
+                  "status": "active",
+                  "user_id": 1
+              }
+          ]
+      }
+  }
+  ```
+
+  - ### Create Order
+    create empty order
+
+  Path: `/orders`
+
+  Method: **_POST_** / Status code : `201`
+
+  #### Header
+
+  | key           | value                      |
+  | ------------- | -------------------------- |
+  | Authorization | Bearer < **_JWT token_** > |
+  | Content-Type  | application/json           |
+
+  > Examples
+
+  `/orders`
+  list of active and completed orders that related to user.
+
+  > Return Example
+
+  ```
+  {
+    "status": "success",
+    "order": {
+        "id": 1,
+        "status": "active",
+        "user_id": 1
+    }
+  }
+  ```
