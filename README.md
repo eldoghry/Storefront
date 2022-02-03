@@ -215,9 +215,10 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   #### Parameters, Body & Queries
 
-  | Key Type  | key  | Type | Default | Required | in URL | in Body | Description |
-  | --------- | ---- | ---- | ------- | -------- | ------ | ------- | ----------- |
-  | parameter | _id_ | int  | -       | Yes      | Yes    | No      | must be > 0 |
+  | Key Type | key        | Type   | Default | Required | in URL | in Body | Description |
+  | -------- | ---------- | ------ | ------- | -------- | ------ | ------- | ----------- |
+  | body     | _username_ | string | -       | Yes      | No     | Yes     | -           |
+  | body     | _password_ | string | -       | Yes      | No     | Yes     | -           |
 
   > Examples
 
