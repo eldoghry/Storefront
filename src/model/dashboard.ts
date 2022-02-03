@@ -14,4 +14,17 @@ export default class DashboardQueries {
       throw `can't get product with category(${categoryID}): ${err}`;
     }
   }
+
+  async popularProduct(limit: number = 5, sort: string = 'DESC'): Promise<product[]> {
+    try {
+      const con = await client.connect();
+      const sql = `SELECT product_id, count(*) FROM order_products GROUP BY product_id ORDER BY count ${sort} LIMIT ${limit}`;
+      const results = await con.query(sql);
+      con.release();
+
+      return results.rows;
+    } catch (err) {
+      throw `can't get most popular products: ${err}`;
+    }
+  }
 }

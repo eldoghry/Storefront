@@ -2,10 +2,15 @@ import order from '../interface/order';
 import client from '../database';
 
 export default class OrderStore {
-  async index(userID: number): Promise<order[]> {
+  async index(userID: number, status: string = ''): Promise<order[]> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM orders WHERE user_id=$1`;
+      const sql = status
+        ? `SELECT * FROM orders WHERE user_id=$1 AND status='${status}'`
+        : `SELECT * FROM orders WHERE user_id=$1`;
+      // const sql = `SELECT * FROM orders WHERE user_id=$1`;
+
+      console.log(status, sql);
       const results = await con.query(sql, [userID]);
       con.release();
 

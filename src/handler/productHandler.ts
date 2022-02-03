@@ -52,8 +52,7 @@ const show = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     const product = await new ProductStore().show(id);
 
-    if (!product)
-      return customErrorRes(res, 400, `product with id(${id}) not found`);
+    if (!product) return customErrorRes(res, 400, `product with id(${id}) not found`);
 
     res.status(200).json({
       status: 'success',
@@ -93,9 +92,7 @@ const update = async (req: Request, res: Response) => {
     //make sure there is data that should be updated
     const shouldUpdate: boolean = Object.keys(updateObj).length > 1;
 
-    const product = shouldUpdate
-      ? await new ProductStore().update(updateObj)
-      : await new ProductStore().show(id);
+    const product = shouldUpdate ? await new ProductStore().update(updateObj) : await new ProductStore().show(id);
 
     res.status(200).json({
       status: 'success',

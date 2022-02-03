@@ -21,11 +21,7 @@ export default class ProductStore {
       //TODO: check category first
       const con = await client.connect();
       const sql = `INSERT INTO products (name, price, category_id) VALUES($1, $2, $3) RETURNING *`;
-      const results = await con.query(sql, [
-        pro.name,
-        pro.price,
-        pro.category_id,
-      ]);
+      const results = await con.query(sql, [pro.name, pro.price, pro.category_id]);
 
       con.release();
 
@@ -67,22 +63,16 @@ export default class ProductStore {
       let arr: string[] = [];
 
       for (const [key, value] of Object.entries(updateProductObj)) {
-        if (key !== 'id')
-          arr.push(
-            `${key}=${typeof value === 'string' ? "'" + value + "'" : value}`
-          );
+        if (key !== 'id') arr.push(`${key}=${typeof value === 'string' ? "'" + value + "'" : value}`);
       }
 
       const con = await client.connect();
-      const sql = ` UPDATE products SET ${arr.join(
-        ', '
-      )} WHERE id=$1 RETURNING *`;
+      const sql = ` UPDATE products SET ${arr.join(', ')} WHERE id=$1 RETURNING *`;
 
       const results = await con.query(sql, [updateProductObj.id]);
       con.release();
 
-      if (!results.rows[0])
-        throw `product with id:(${updateProductObj.id}) not found!`;
+      if (!results.rows[0]) throw `product with id:(${updateProductObj.id}) not found!`;
 
       return results.rows[0];
     } catch (err) {

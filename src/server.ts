@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 app.use('/users', userRouter);
 app.use('/categories', categoryRouter);
 app.use('/products', productRouter);
-app.use('/dashboard', dashboardRouter);
 app.use('/orders', orderRouter);
+app.use('/dashboard', dashboardRouter);
 
 //Handle unkown endpoints
 app.all('*', (req: Request, res: Response) =>

@@ -16,7 +16,14 @@ const index = async (req: Request, res: Response) => {
     const token: string = req.headers.authorization?.split(' ')[1] as string;
     const user: user = getUserFromToken(token);
 
-    const orders: order[] = await new OrderStore().index(user.id as number);
+    //status query
+    const status: string | undefined = req.query.status as string;
+
+    let orders: order[];
+
+    if (status && ['active', 'complete'].includes(status.toLowerCase()))
+      orders = await new OrderStore().index(user.id as number, status.toLowerCase());
+    else orders = await new OrderStore().index(user.id as number);
 
     res.status(200).json({
       status: 'success',
