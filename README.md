@@ -53,6 +53,7 @@ status code : `200`
 | _status_ | string | **-**   | No       | must be (active or complete) |
 
 > Examples
-> `/orders` list of active and completed orders that related to user
-> `/orders/?status=complete` list of completed orders that related to user
-> `/orders/?status=active` list of active orders that related to user
+
+    - `/orders` list of active and completed orders that related to user
+    - `/orders/?status=complete` list of completed orders that related to user
+    -`/orders/?status=active` list of active orders that related to user
