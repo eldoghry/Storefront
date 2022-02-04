@@ -1,6 +1,6 @@
 # Storefront Backend Project
 
-API created using
+Online Storefront API created using
 
 - Node/Express for the application logic
 
@@ -19,25 +19,29 @@ API created using
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run
 `yarn` or `npm install` in your terminal at the project root.
 
-- create postgres database and change database.json with nessasry inforamtion
+1- create postgres database and change database.json with nessasry inforamtion
 
-  - To create postgres database using PSQL CLI
+- To create postgres database using PSQL CLI
 
-    `CREATE DATABASE db_name;`
+  `CREATE DATABASE db_name;`
 
-  - Create nessary user and priviages
+- Create nessary user and priviages
 
-    `CREATE ROLE db_user WITH PASSWORD 'password';`
+  `CREATE ROLE db_user WITH PASSWORD 'password';`
 
-    `GRANT ALL PRIVILEGES TO db_user ON DATABASE db_name;`
+  `GRANT ALL PRIVILEGES TO db_user ON DATABASE db_name;`
 
-    `ULTER USER db_user CREATEDB;`
+  `ULTER USER db_user CREATEDB;`
 
 - Migrate to create nessacery tables:
 
   run `db-migrate up` in terminal.
 
-## API Resources
+- Database Schema
+
+  ![alt text](https://drive.google.com/file/d/16NJhiZ2-r8qs12LdxFa5kfl-B883ecak/view?usp=sharing)
+
+## API ROUTES
 
 <details open>
     <summary> Users </summary>
@@ -1055,3 +1059,5 @@ update product with id 1.
   ```
 
 </details>
+
+## DATABASE SCHEMA
