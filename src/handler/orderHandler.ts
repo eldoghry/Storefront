@@ -110,6 +110,7 @@ const update = async (req: Request, res: Response) => {
     res.status(200).json({
       status: 'success',
       order: updatedOrder,
+      cart,
     });
   } catch (err) {
     customErrorRes(res, 500, err as string);

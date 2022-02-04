@@ -11,6 +11,8 @@ export default class OrderStore {
         : `SELECT * FROM orders WHERE user_id=$1`;
       // const sql = `SELECT * FROM orders WHERE user_id=$1`;
 
+      console.log(sql);
+
       const results = await con.query(sql, [userID]);
       con.release();
 

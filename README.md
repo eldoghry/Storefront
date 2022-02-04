@@ -132,7 +132,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 - ### Show user
 
-  Get more information about user, **JWT user token** is required.
+  Get more information about user, **JWT user token** is required, User can show its profile.
 
   Path: `/users/:id`
 
@@ -173,7 +173,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 - ### Delete User
 
-  delete user, **JWT user token** is required.
+  delete user, **JWT user token** is required, User can delete its profile.
 
   Path: `/users/:id`
 

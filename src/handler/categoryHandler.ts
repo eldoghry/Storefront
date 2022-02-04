@@ -24,12 +24,11 @@ const index = async (_req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-    const name: string | undefined = normalizeString(req.body.name);
+    const name: string = normalizeString(req.body.name);
 
     if (!name) throw 'valid name(string) is required';
 
     const newCategory: category = await new categoryStore().create(name);
-
     res.status(201).json({
       status: 'success',
       category: newCategory,

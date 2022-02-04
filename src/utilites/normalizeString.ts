@@ -3,5 +3,7 @@
 // };
 
 export default (str: string): string => {
+  if (!str) return '';
+
   return str.trim().toLocaleLowerCase();
 };
