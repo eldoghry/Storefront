@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 //importing routers
 import userRouter from './router/userRouter';
@@ -15,6 +16,12 @@ const address = `${host}:${port}`;
 
 //General Middlewares
 // TODO: implement cors
+const corsOptions = {
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 //Routing
@@ -24,7 +31,7 @@ app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 app.use('/dashboard', dashboardRouter);
 
-//Handle unkown endpoints
+//Handle unknown endpoints
 app.all('*', (req: Request, res: Response) =>
   res.status(404).json({
     status: 'fail',

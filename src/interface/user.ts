@@ -3,7 +3,7 @@ export default interface user {
   username: string;
   firstname?: string;
   lastname?: string;
-  password: string;
+  password?: string;
   password_digest?: string;
   token?: string;
 }

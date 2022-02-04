@@ -40,8 +40,6 @@ const create = async (req: Request, res: Response) => {
       password,
     });
 
-    console.log(newUser);
-
     const userSign = jwt.sign(newUser as user, process.env.TOKEN_ACCESS_SECRET as string, {
       expiresIn: '10h',
     });

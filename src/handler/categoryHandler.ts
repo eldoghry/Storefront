@@ -26,7 +26,7 @@ const create = async (req: Request, res: Response) => {
   try {
     const name: string | undefined = normalizeString(req.body.name);
 
-    if (!name) throw 'Invalid name, must use valid string name';
+    if (!name) throw 'valid name(string) is required';
 
     const newCategory: category = await new categoryStore().create(name);
 
@@ -80,7 +80,7 @@ const update = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     const name: string | undefined = normalizeString(req.body.name);
 
-    if (!name) throw 'Invalid name, must use valid string name';
+    if (!name) throw 'valid name(string) is required';
 
     const category = await new categoryStore().update({ id, name });
 

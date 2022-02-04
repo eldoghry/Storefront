@@ -23,7 +23,6 @@ export default class CategoryStore {
 
       con.release();
 
-      console.log('cat created');
       return results.rows[0];
     } catch (err) {
       throw `can't create categories ${err}`;

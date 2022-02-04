@@ -89,9 +89,9 @@ export default class UserStore {
       const con = await client.connect();
       const sql = `SELECT * FROM users WHERE username = $1 AND password_digest = $2`;
       const results = await con.query(sql, [username, hash]);
-      con.release();
-
-      return results.rows[0];
+      const user = results.rows[0];
+      const isPasswordCorrect: boolean = hash === user.password_digest;
+      return isPasswordCorrect;
     } catch (err) {
       throw `can't authenticate user with username (${username}): ${err}`;
     }

@@ -31,6 +31,8 @@ This repo contains a basic Node and Express app to get you started in constructi
 
     `GRANT ALL PRIVILEGES TO db_user ON DATABASE db_name;`
 
+    `ULTER USER db_user CREATEDB;`
+
 - Migrate to create nessacery tables:
 
   run `db-migrate up` in terminal.

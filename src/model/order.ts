@@ -1,4 +1,5 @@
 import order from '../interface/order';
+import cart from '../interface/cart';
 import client from '../database';
 
 export default class OrderStore {
@@ -10,7 +11,6 @@ export default class OrderStore {
         : `SELECT * FROM orders WHERE user_id=$1`;
       // const sql = `SELECT * FROM orders WHERE user_id=$1`;
 
-      console.log(status, sql);
       const results = await con.query(sql, [userID]);
       con.release();
 
@@ -80,7 +80,7 @@ export default class OrderStore {
     }
   }
 
-  async addProduct(order_id: number, product_id: number, quantity: number): Promise<order> {
+  async addProduct(order_id: number, product_id: number, quantity: number): Promise<cart> {
     try {
       //TODO: check category first
       const con = await client.connect();
@@ -107,7 +107,7 @@ export default class OrderStore {
     }
   }
 
-  async cart(order_id: number): Promise<order[]> {
+  async cart(order_id: number): Promise<cart[]> {
     try {
       //TODO: check category first
       const con = await client.connect();
