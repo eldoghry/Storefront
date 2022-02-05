@@ -54,9 +54,42 @@ This repo contains a basic Node and Express app to get you started in constructi
 
   run `db-migrate up` in terminal.
 
-- Database Schema
+## DATABASE SCHEMA
 
-  ![StoreFront_DB_Schema](https://raw.githubusercontent.com/mma-90/Storefront/master/schema.PNG)
+![StoreFront_DB_Schema](https://raw.githubusercontent.com/mma-90/Storefront/master/schema.PNG)
+
+#### Users Table
+
+- id (INTEGER) Primary Key
+- username (VARCHAR(50))
+- firstName (VARCHAR(50))
+- lastName (VARCHAR(50))
+- password_digest (text)
+
+#### Categories Table
+
+- id (INTEGER) Primary Key
+- name (VARCHAR(50))
+
+#### Products Table
+
+- id (INTEGER) Primary Key
+- name (VARCHAR(50))
+- price (INTEGER)
+- category_id (INTEGER) Foreign Key (Categories Table)
+
+#### Orders Table
+
+- id Primary Key
+- user_id (INTEGER) Foreign Key (Users Table)
+- status (active or complete)
+
+#### Order_products Table
+
+- id (INTEGER) Primary Key
+- quantity (INTEGER)
+- order_id (INTEGER) Foreign Key (Orders Table)
+- product_id (INTEGER) Foreign Key (Products Table)
 
 ## API ROUTES
 
@@ -1076,5 +1109,3 @@ update product with id 1.
   ```
 
 </details>
-
-## DATABASE SCHEMA
