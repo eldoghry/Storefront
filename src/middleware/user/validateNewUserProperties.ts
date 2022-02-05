@@ -11,11 +11,20 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
   const invalidMsg = [];
 
-  if (!username || typeof username !== 'string') invalidMsg.push('username(string)');
-  if (!firstname || typeof firstname !== 'string') invalidMsg.push('firstname(string)');
-  if (!lastname || typeof lastname !== 'string') invalidMsg.push('lastname(string)');
-  if (!password || typeof password !== 'string') invalidMsg.push('password(string)');
+  if (!username || typeof username !== 'string')
+    invalidMsg.push('username(string)');
+  if (!firstname || typeof firstname !== 'string')
+    invalidMsg.push('firstname(string)');
+  if (!lastname || typeof lastname !== 'string')
+    invalidMsg.push('lastname(string)');
+  if (!password || typeof password !== 'string')
+    invalidMsg.push('password(string)');
 
-  if (invalidMsg.length) return customErrorRes(res, 400, `${invalidMsg.join(', ')} are required to create new product`);
+  if (invalidMsg.length)
+    return customErrorRes(
+      res,
+      400,
+      `${invalidMsg.join(', ')} are required to create new resource`
+    );
   else next();
 };

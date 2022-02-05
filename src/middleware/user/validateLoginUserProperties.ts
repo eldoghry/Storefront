@@ -12,6 +12,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
   if (!username || typeof username !== 'string') invalidMsg.push('username(string)');
   if (!password || typeof password !== 'string') invalidMsg.push('password(string)');
 
-  if (invalidMsg.length) return customErrorRes(res, 400, `${invalidMsg.join(', ')} are required to create new product`);
+  if (invalidMsg.length) return customErrorRes(res, 400, `${invalidMsg.join(', ')} are required to create new resource`);
   else next();
 };
