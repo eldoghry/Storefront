@@ -54,9 +54,9 @@ export default class UserStore {
       const con = await client.connect();
       const sql = `DELETE FROM users WHERE id=$1 RETURNING *`;
       const results = await con.query(sql, [id]);
-
-      console.log(results.rows[0]);
       con.release();
+
+      // console.log(results.rows[0]);
 
       if (!results.rows[0]) throw `user with id:(${id}) not exist!`;
     } catch (err) {
@@ -90,7 +90,12 @@ export default class UserStore {
       const sql = `SELECT * FROM users WHERE username = $1 AND password_digest = $2`;
       const results = await con.query(sql, [username, hash]);
       const user = results.rows[0];
+      con.release();
+
+      if (!user) return false;
+
       const isPasswordCorrect: boolean = hash === user.password_digest;
+
       return isPasswordCorrect;
     } catch (err) {
       throw `can't authenticate user with username (${username}): ${err}`;

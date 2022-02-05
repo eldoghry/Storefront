@@ -7,18 +7,30 @@ import isAuthTokenValid from '../middleware/user/isAuthTokenValid';
 import authenticatUser from '../middleware/user/authenticatUser';
 import validateID from '../middleware/general/validateID';
 import validateOrderAndUser from '../middleware/order/validateOrderAndUser';
+import validateOrderParams from '../middleware/order/validateOrderParams';
 
 const router = express.Router();
 const checkAuthToken = [isAuthTokenExist, isAuthTokenValid, authenticatUser]; //user exist, credientials correct
 
-router.route('/').get(checkAuthToken, handler.index).post(checkAuthToken, handler.create);
+router
+  .route('/')
+  .get(checkAuthToken, handler.index)
+  .post(checkAuthToken, handler.create);
 
 router
   .route('/:id')
   .get(validateID, checkAuthToken, validateOrderAndUser, handler.show)
   .delete(validateID, checkAuthToken, validateOrderAndUser, handler.destroy)
-  .patch(validateID, checkAuthToken, validateOrderAndUser, handler.update);
+  .patch(
+    validateID,
+    validateOrderParams,
+    checkAuthToken,
+    validateOrderAndUser,
+    handler.update
+  );
 
-router.route('/:id/products').post(validateID, checkAuthToken, validateOrderAndUser, handler.addProduct);
+router
+  .route('/:id/products')
+  .post(validateID, checkAuthToken, validateOrderAndUser, handler.addProduct);
 
 export default router;

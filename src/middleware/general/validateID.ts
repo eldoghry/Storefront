@@ -6,5 +6,6 @@ import customErrorRes from '../../utilites/customError';
 export default (req: Request, res: Response, next: NextFunction) => {
   const id = parseInt(req.params.id);
   if (Number.isFinite(id) && id > 0) next();
-  else return customErrorRes(res, 400, `Invalid ID: id must be integer and > 0`);
+  else
+    return customErrorRes(res, 400, `Invalid ID: id must be integer and > 0`);
 };

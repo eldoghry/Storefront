@@ -9,14 +9,10 @@ export default class OrderStore {
       const sql = status
         ? `SELECT * FROM orders WHERE user_id=$1 AND status='${status}'`
         : `SELECT * FROM orders WHERE user_id=$1`;
-      // const sql = `SELECT * FROM orders WHERE user_id=$1`;
-
-      console.log(sql);
 
       const results = await con.query(sql, [userID]);
       con.release();
 
-      // console.log(results.rows);
       return results.rows;
     } catch (err) {
       throw `can't get orders: ${err}`;
@@ -82,7 +78,11 @@ export default class OrderStore {
     }
   }
 
-  async addProduct(order_id: number, product_id: number, quantity: number): Promise<cart> {
+  async addProduct(
+    order_id: number,
+    product_id: number,
+    quantity: number
+  ): Promise<cart> {
     try {
       //TODO: check category first
       const con = await client.connect();

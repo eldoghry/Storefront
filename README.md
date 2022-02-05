@@ -19,7 +19,24 @@ Online Storefront API created using
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run
 `yarn` or `npm install` in your terminal at the project root.
 
-1- create postgres database and change database.json with nessasry inforamtion
+1- You Should create .env file in root with the following content
+
+| Env Key             | Value                  | Descreption                                           |
+| ------------------- | ---------------------- | ----------------------------------------------------- |
+| SERVER_PORT         | 3000                   | Server port                                           |
+| SERVER_HOST         | (server ip address)    | Server ip address                                     |
+| DATABASE_HOST       | (db server ip address) | DB Server ip address                                  |
+| DATABASE_PORT       | 5432                   | PG DB Default port                                    |
+| DATABASE_NAME       | (db name)              | Development DB name                                   |
+| DATABASE_TEST_NAME  | (test db name)         | Test DB name for testing                              |
+| DATABASE_USER       | (DB User)              | User for accessing PG DB                              |
+| DATABASE_PASSWORD   | (DB Password)          | Password for accessing PG DB                          |
+| BCRYPT_PASSWORD     | string                 | Used by bcrypt to encrypt users password              |
+| SALT_ROUNDS         | int default(10)        | Used by bcrypt to encrypt users password              |
+| TOKEN_ACCESS_SECRET | string                 | Used by JWT to generate tokens                        |
+| ENV                 | (dev or test)          | Used for switching between development and testing db |
+
+2- create postgres database and change database.json with nessasry inforamtion
 
 - To create postgres database using PSQL CLI
 
@@ -39,7 +56,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 - Database Schema
 
-  ![alt text](https://drive.google.com/file/d/16NJhiZ2-r8qs12LdxFa5kfl-B883ecak/view?usp=sharing)
+  ![StoreFront_DB_Schema](https://raw.githubusercontent.com/mma-90/Storefront/master/schema.PNG)
 
 ## API ROUTES
 

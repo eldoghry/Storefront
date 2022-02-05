@@ -10,8 +10,8 @@ import dashboardRouter from './router/dashboardRouter';
 import orderRouter from './router/orderRouter';
 
 const app: express.Application = express();
-const host: string = process.env.HOST as string;
-const port: number = process.env.port as unknown as number;
+const host: string = process.env.SERVER_HOST as string;
+const port: number = parseInt(process.env.SERVER_PORT as unknown as string);
 const address = `${host}:${port}`;
 
 //General Middlewares
@@ -43,3 +43,5 @@ app.all('*', (req: Request, res: Response) =>
 app.listen(port, function () {
   console.log(`starting app on: ${address}`);
 });
+
+export default app;

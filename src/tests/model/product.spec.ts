@@ -72,7 +72,10 @@ export default () => {
       });
 
       it('Update method should update and return product', async () => {
-        const result = await productStore.update({ id: 1, name: 'new product 1' });
+        const result = await productStore.update({
+          id: 1,
+          name: 'new product 1',
+        });
         expect(result).toEqual({
           id: 1,
           name: 'new product 1',

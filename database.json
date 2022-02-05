@@ -12,6 +12,9 @@
     },
     "password": {
       "ENV": "DATABASE_PASSWORD"
+    },
+    "port": {
+      "ENV": "DATABASE_PORT"
     }
   },
 
@@ -28,6 +31,9 @@
     },
     "password": {
       "ENV": "DATABASE_PASSWORD"
+    },
+    "port": {
+      "ENV": "DATABASE_PORT"
     }
   }
 }

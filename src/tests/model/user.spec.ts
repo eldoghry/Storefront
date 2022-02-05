@@ -6,9 +6,9 @@ export default () => {
   const userStore = new UserStore();
   const pepear: string = process.env.BCRYPT_PASSWORD as string;
   const validUser: user = {
-    username: 'magdy',
+    username: 'username',
     firstname: 'mohamed',
-    lastname: 'madgy',
+    lastname: 'magdy',
     password: 'password',
   };
 
@@ -34,51 +34,33 @@ export default () => {
     describe('User: Test Method Functionailty \n', () => {
       it('Create method should add new user and return token', async () => {
         const result: user = await userStore.create(validUser);
-        const isSamePassword = bcrypt.compare(validUser + pepear, result.password_digest as string);
+        const isSamePassword = bcrypt.compare(
+          validUser + pepear,
+          result.password_digest as string
+        );
 
         expect(validUser.username === result.username).toBeTruthy();
         expect(validUser.firstname === result.firstname).toBeTruthy();
         expect(validUser.lastname === result.lastname).toBeTruthy();
         expect(isSamePassword).toBeTruthy();
       });
-
-      // it('Create method fail becouse user name not unique', async () => {
-      //   try {
-      //     await userStore.create('user 1');
-      //   } catch (err) {
-      //     expect(err).toEqual(
-      //       'can\'t create categories error: duplicate key value violates unique constraint "categories_name_key"'
-      //     );
-      //   }
-      // });
 
       it('Index method should return list of categories', async () => {
         const result = await userStore.index();
-        expect(result).toEqual([{ id: 1, username: 'magdy', firstname: 'mohamed', lastname: 'madgy' }]);
+        expect(result.length).toEqual(1);
       });
 
-      it('Show method should return user', async () => {
+      it('Show user(1) method should return user', async () => {
         const result = await userStore.show(1);
-        const isSamePassword = bcrypt.compare(validUser + pepear, result.password_digest as string);
+        const isSamePassword = bcrypt.compare(
+          validUser.password + pepear,
+          result.password_digest as string
+        );
         expect(validUser.username === result.username).toBeTruthy();
         expect(validUser.firstname === result.firstname).toBeTruthy();
         expect(validUser.lastname === result.lastname).toBeTruthy();
         expect(isSamePassword).toBeTruthy();
       });
-
-      // it('Update method should update and return user', async () => {
-      //   const result = await userStore.update({ id: 1, name: 'new categroy 1' });
-      //   expect(result).toEqual({
-      //     id: 1,
-      //     name: 'new categroy 1',
-      //   });
-      // });
-
-      // it('Delete method should remove user and index return empty list', async () => {
-      //   await userStore.delete(1);
-      //   const result = await userStore.index();
-      //   expect(result).toEqual([]);
-      // });
     }); //EOF Test Method Functionailty
   }); //EOF user TEST SUITE
 }; //EOF EXPORT

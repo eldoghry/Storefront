@@ -22,7 +22,10 @@ const index = async (req: Request, res: Response) => {
     let orders: order[];
 
     if (status && ['active', 'complete'].includes(status.toLowerCase()))
-      orders = await new OrderStore().index(user.id as number, status.toLowerCase());
+      orders = await new OrderStore().index(
+        user.id as number,
+        status.toLowerCase()
+      );
     else orders = await new OrderStore().index(user.id as number);
 
     res.status(200).json({
@@ -37,7 +40,10 @@ const index = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     const token = req.headers.authorization?.split(' ')[1] as string;
-    const user: user = jwt.verify(token, process.env.TOKEN_ACCESS_SECRET as string) as user;
+    const user: user = jwt.verify(
+      token,
+      process.env.TOKEN_ACCESS_SECRET as string
+    ) as user;
 
     const newOrder: order = await new OrderStore().create(user.id as number);
 
@@ -56,13 +62,18 @@ const show = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     const order = await new OrderStore().show(id);
 
-    if (!order) return customErrorRes(res, 400, `order with id(${id}) not found`);
+    if (!order)
+      return customErrorRes(res, 400, `order with id(${id}) not found`);
 
     const token: string = req.headers.authorization?.split(' ')[1] as string;
     const user = getUserFromToken(token);
 
     if (user.id != (order.user_id as number))
-      return customErrorRes(res, 401, `You don't have previlige to access this resourse`);
+      return customErrorRes(
+        res,
+        401,
+        `You don't have previlige to access this resourse`
+      );
 
     //2) return full cart of this order
     const cart = await new OrderStore().cart(id);
@@ -96,13 +107,18 @@ const update = async (req: Request, res: Response) => {
     const status: string = req.body.status;
 
     //1) validate status
-    if (!status || !['active', 'complete'].includes(status))
-      return customErrorRes(res, 401, `status is required and must be (active or complete)`);
+    // if (!status || !['active', 'complete'].includes(status))
+    //   return customErrorRes(
+    //     res,
+    //     400,
+    //     `status is required and must be (active or complete)`
+    //   );
 
     //2) check if order not empty
     const cart = await new OrderStore().cart(id);
 
-    if (!cart.length && status === 'complete') return customErrorRes(res, 400, `can't complete empty order`);
+    if (!cart.length && status === 'complete')
+      return customErrorRes(res, 400, `can't complete empty order`);
 
     //3) update order
     const updatedOrder = await new OrderStore().update(id, status);
@@ -126,16 +142,28 @@ const addProduct = async (req: Request, res: Response) => {
 
     //1) validate product id, quantity is exist and valid
     const invalidMsg = [];
-    if (!productID || typeof productID !== 'number' || productID < 1) invalidMsg.push('productID(number)');
-    if (!quantity || typeof quantity !== 'number') invalidMsg.push('quantity(number)');
+    if (!productID || typeof productID !== 'number' || productID < 1)
+      invalidMsg.push('productID(number)');
+    if (!quantity || typeof quantity !== 'number')
+      invalidMsg.push('quantity(number)');
     if (invalidMsg.length)
-      return customErrorRes(res, 400, `${invalidMsg.join(', ')} are required to add products to order(${orderID})`);
+      return customErrorRes(
+        res,
+        400,
+        `${invalidMsg.join(
+          ', '
+        )} are required to add products to order(${orderID})`
+      );
 
     //validate if order already exist
     const order = await new OrderStore().show(orderID);
 
     if (order && order.status === 'complete')
-      return customErrorRes(res, 400, `cannot add products to completed order(${orderID})`);
+      return customErrorRes(
+        res,
+        400,
+        `cannot add products to completed order(${orderID})`
+      );
 
     //2) update order
     await new OrderStore().addProduct(orderID, productID, quantity);

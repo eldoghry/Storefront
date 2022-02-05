@@ -54,7 +54,10 @@ export default () => {
       });
 
       it('Update method should update and return category', async () => {
-        const result = await categoryStore.update({ id: 1, name: 'new categroy 1' });
+        const result = await categoryStore.update({
+          id: 1,
+          name: 'new categroy 1',
+        });
         expect(result).toEqual({
           id: 1,
           name: 'new categroy 1',

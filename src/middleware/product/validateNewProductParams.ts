@@ -4,6 +4,8 @@ import customErrorRes from '../../utilites/customError';
 //validate new product params
 
 export default (req: Request, res: Response, next: NextFunction) => {
+
+
   const name: string = req.body.name;
   const price: number = req.body.price;
   const category_id: number = parseInt(req.body.category_id);

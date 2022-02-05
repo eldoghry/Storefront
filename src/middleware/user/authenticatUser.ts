@@ -15,8 +15,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     const isAuthenicated: boolean = await new UserStore().auth(user.username as string, user.password_digest as string);
 
-    console.log(`isAuthenicated: ${isAuthenicated}`);
-
     if (!isAuthenicated) return customErrorRes(res, 401, `Access Denied! Wrong Credentials or user not exist`);
     else next();
   } catch (err) {

@@ -38,17 +38,8 @@ export default () => {
     }); //EOF Test Method Existance
 
     describe('Order: Test Methods Functionailty \n', () => {
-      //create new category
-
       beforeAll(async () => {
         await new CategoryStore().create('category 3'); //id:3
-
-        await new UserStore().create({
-          username: 'user2',
-          firstname: 'mohamed',
-          lastname: 'madgy',
-          password: 'password',
-        }); //id: 2
 
         await new ProductStore().create({
           name: 'product 2',
@@ -58,20 +49,20 @@ export default () => {
       });
 
       it('Create method should add new order and return it', async () => {
-        const result = await orderStore.create(2);
+        const result = await orderStore.create(1);
         expect(result).toEqual({
           id: 1,
-          user_id: 2,
+          user_id: 1,
           status: 'active',
         });
       });
 
       it('Index method should return list of orders', async () => {
-        const result = await orderStore.index(2);
+        const result = await orderStore.index(1);
         expect(result).toEqual([
           {
             id: 1,
-            user_id: 2,
+            user_id: 1,
             status: 'active',
           },
         ]);
@@ -81,7 +72,7 @@ export default () => {
         const result = await orderStore.show(1);
         expect(result).toEqual({
           id: 1,
-          user_id: 2,
+          user_id: 1,
           status: 'active',
         });
       });
@@ -90,7 +81,7 @@ export default () => {
         const result = await orderStore.update(1, 'active');
         expect(result).toEqual({
           id: 1,
-          user_id: 2,
+          user_id: 1,
           status: 'active',
         });
       });
@@ -120,14 +111,14 @@ export default () => {
         const result = await orderStore.update(1, 'complete');
         expect(result).toEqual({
           id: 1,
-          user_id: 2,
+          user_id: 1,
           status: 'complete',
         });
       });
 
       it('Delete method should remove order and index return empty list', async () => {
         await orderStore.delete(1);
-        const result = await orderStore.index(2);
+        const result = await orderStore.index(1);
         expect(result).toEqual([]);
       });
     }); //EOF Test Method Functionailty

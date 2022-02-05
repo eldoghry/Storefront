@@ -5,8 +5,10 @@ import customErrorRes from '../utilites/customError';
 
 const productWithCategory = async (req: Request, res: Response) => {
   try {
-    const categoryID = parseInt(req.params.category_id);
-    const products: product[] = await new Dashboard().productWithCategory(categoryID);
+    const categoryID = parseInt(req.params.id);
+    const products: product[] = await new Dashboard().productWithCategory(
+      categoryID
+    );
 
     res.status(200).json({
       status: 'success',
@@ -36,7 +38,10 @@ const popularProduct = async (req: Request, res: Response) => {
       finalLimit = limit;
     }
 
-    const products: product[] = await new Dashboard().popularProduct(finalLimit, finalSort);
+    const products: product[] = await new Dashboard().popularProduct(
+      finalLimit,
+      finalSort
+    );
 
     res.status(200).json({
       status: 'success',

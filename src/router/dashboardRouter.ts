@@ -1,9 +1,12 @@
 import express from 'express';
 import handler from '../service/dashboard';
 
-const router = express.Router();
+import validateID from '../middleware/general/validateID';
 
-router.route('/products/category/:category_id').get(handler.productWithCategory);
+const router = express.Router();
+router
+  .route('/products/category/:id')
+  .get(validateID, handler.productWithCategory);
 
 router.route('/products/popular/').get(handler.popularProduct);
 

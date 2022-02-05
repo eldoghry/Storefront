@@ -34,7 +34,6 @@ const create = async (req: Request, res: Response) => {
       price,
       category_id,
     });
-
     res.status(201).json({
       status: 'success',
       product: newProduct,
@@ -69,6 +68,7 @@ const show = async (req: Request, res: Response) => {
 const destroy = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id);
+
     await new ProductStore().delete(id);
 
     res.sendStatus(204);
